@@ -1,0 +1,8 @@
+# **/ syntax ignores file in any sub-directories.
+**/.env
+**/package-lock.json
+**/node_modules
+**/build
+**/dist
+-docker-compose.override.yaml
+docker-compose.override.yaml

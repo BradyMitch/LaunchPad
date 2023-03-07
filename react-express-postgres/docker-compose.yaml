@@ -1,0 +1,80 @@
+services:
+  ##### FRONTEND (NodeJS React) #####
+  frontend:
+    container_name: frontend
+    tty: true
+    build:
+      context: .
+      target: prod # Use docker-compose.override.yaml to set to 'dev'.
+      dockerfile: ./frontend/Dockerfile
+    networks:
+      - project-network
+    ports:
+      - ${FRONTEND_PORT:-9000}:9000
+
+  ##### BACKEND (NodeJS Express API) #####
+  backend:
+    container_name: backend
+    tty: true
+    init: true # Properly handles running as PID 1 inside a container. Source: https://github.com/nodejs/docker-node/blob/main/docs/BestPractices.md#handling-kernel-signals
+    restart: on-failure
+    healthcheck:
+      test: ["CMD", "curl", "-f", "${BACKEND_HEALTHCHECK_URL}"] # Check health endpoint for healthy service.
+      interval: 15s # Perform the health check every 15 seconds.
+      timeout: 5s # Consider the health check a failure if it takes more than 5 seconds.
+      retries: 5 # Retry the health check up to 5 times before considering the container unhealthy.
+    build:
+      context: .
+      target: prod # Use docker-compose.override.yaml to set to 'dev'.
+      dockerfile: ./backend/Dockerfile
+    environment:
+      - ENVIRONMENT=${ENVIRONMENT:-local}
+      - PORT=${BACKEND_PORT:-9009}
+      - FRONTEND_PORT=${FRONTEND_PORT:-9000}
+      - PGHOST=${DATABASE_HOST:-database} # Name of the database container.
+      - PGUSER=${DATABASE_USER:-postgres}
+      - PGPASSWORD=${DATABASE_PASSWORD:-postgres}
+      - PGDATABASE=${DATABASE_NAME:-project}
+      - PGPORT=5432
+      - SSO_AUTH_SERVER_URL=${SSO_AUTH_SERVER_URL}
+      - SSO_CLIENT_ID=${SSO_CLIENT_ID}
+      - SSO_CLIENT_SECRET=${SSO_CLIENT_SECRET}
+    networks:
+      - project-network
+    ports:
+      - ${BACKEND_PORT:-9009}:9009
+    depends_on:
+      database:
+        condition: service_healthy
+
+  ##### DATABASE (Postgres) #####
+  database:
+    container_name: database
+    tty: true
+    image: postgres:15.2-alpine
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres}"] # Check if PostgreSQL is ready.
+      interval: 15s # Perform the health check every 15 seconds.
+      timeout: 5s # Consider the health check a failure if it takes more than 5 seconds.
+      retries: 5 # Retry the health check up to 5 times before considering the container unhealthy.
+    environment:
+      - POSTGRES_USER=${DATABASE_USER:-postgres}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD:-postgres}
+      - POSTGRES_DB=${DATABASE_NAME:-project}
+    networks:
+      - project-network
+    ports:
+      - 5432:5432
+    volumes:
+      - database-data:/var/lib/postgresql/data # Named volume binded to Postgres' data store directory.
+
+volumes:
+  database-data:
+    driver: local # Stores the volume data on the host machine's file system.
+
+networks:
+  project-network:
+    driver: "bridge" # Internal network that allows containers to communicate with each other.
+
+

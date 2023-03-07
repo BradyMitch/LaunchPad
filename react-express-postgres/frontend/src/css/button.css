@@ -1,0 +1,32 @@
+.btn {
+  cursor: pointer;
+  outline: none;
+  background-color:var(--btn-bg-color);
+  color: var(--btn-txt-color);
+  border-radius: 4em;
+  position: relative;
+  min-width: fit-content;
+  padding-inline: 2rem;
+  padding-block: 1rem;
+  font-size: 1em;
+  font-weight: 700;
+  border: 3px solid var(--btn-txt-color);
+  box-shadow: 0em 0.5em var(--btn-shadow-color);
+}
+
+.btn:active {
+  box-shadow: 0em 0.3em var(--btn-shadow-color);
+  transform: translateY(0.2em);
+}
+
+.btn__primary {
+  --btn-bg-color: var(--yellow);
+  --btn-txt-color: var(--fc-dark);
+  --btn-shadow-color: var(--red);
+}
+
+.btn__secondary {
+  --btn-bg-color: var(--purple);
+  --btn-txt-color: var(--fc-dark);
+  --btn-shadow-color: var(--yellow);
+}

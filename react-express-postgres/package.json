@@ -1,0 +1,13 @@
+{
+  "name": "react-express-postgres",
+  "version": "1.0.0",
+  "description": "LaunchPad Starter Application",
+  "main": "index.js",
+  "license": "ISC",
+  "scripts": {
+    "up": "node scripts/executeCommand DOCKER_UP",
+    "down": "node scripts/executeCommand DOCKER_DOWN",
+    "prune": "node scripts/executeCommand DOCKER_PRUNE",
+    "help": "node scripts/help"
+  }
+}
