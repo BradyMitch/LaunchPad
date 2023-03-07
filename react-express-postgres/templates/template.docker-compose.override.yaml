@@ -1,0 +1,15 @@
+# Directory: .
+# Create me with the 'npm run init' command.
+
+# Disable me by renaming to -docker-compose.override.yaml
+services:
+  backend:
+    build:
+      target: dev
+    volumes:
+      - ./backend:/app
+  frontend:
+    build:
+      target: dev
+    volumes:
+      - ./frontend/src:/app/src

@@ -1,6 +1,16 @@
 const c = require("./colors");
 
 /**
+ * @command init
+ * @description Initializes the project files.
+ */
+exports.INIT = [
+  `echo ${c.Yellow}[INIT] ${c.Lime}Creating files from templates...${c.Reset}`,
+  "node scripts/templates",
+  "docker compose up -d",
+];
+
+/**
  * @command up
  * @description Starts docker containers.
  */

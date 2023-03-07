@@ -8,6 +8,7 @@
     "up": "node scripts/executeCommand DOCKER_UP",
     "down": "node scripts/executeCommand DOCKER_DOWN",
     "prune": "node scripts/executeCommand DOCKER_PRUNE",
+    "init": "node scripts/executeCommand INIT",
     "help": "node scripts/help"
   }
 }
