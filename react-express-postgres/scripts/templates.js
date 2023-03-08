@@ -15,12 +15,8 @@ templates.forEach((template) => {
   // Parse the template file to get the destination directory.
   const templatePath = path.join(TEMPLATES_DIR, template);
   const content = fs.readFileSync(templatePath, "utf8");
-  const directoryMatch = content.match(/^# Directory: (.*)$/m);
-  if (!directoryMatch) {
-    console.error(`Error: ${template} doesn't specify a directory.`);
-    return;
-  }
-  const destDir = directoryMatch[1];
+  const directoryMatch = content.match(/^# Directory: (.*)$/im);
+  const destDir = directoryMatch ? directoryMatch[1] : "";
 
   // Construct the destination path for the new file.
   const destName = template.replace(/^template\./, "");
@@ -28,7 +24,7 @@ templates.forEach((template) => {
 
   // Check if the file already exists.
   if (fs.existsSync(destPath)) {
-    console.error(`${destPath} already exists.`);
+    console.error(`${c.White}${destPath} ${c.Reset}already exists.`);
     return;
   }
 
@@ -37,9 +33,18 @@ templates.forEach((template) => {
   const newContent = lines.slice(3).join("\n");
   fs.writeFileSync(destPath, newContent);
 
-  console.log(`Created ${destPath}`);
-});
+  console.log(`Created ${c.White}${destPath}${c.Reset}`);
 
-console.log(
-  `${c.Lime}Check these files for any secrets/variables that need to be added.${c.Reset}\n`
-);
+  // Log any required variables in the new file.
+  const envMatch = newContent.match(/^([^#=]+)=(.*)$/gm);
+  if (envMatch) {
+    envMatch.forEach((env) => {
+      const [key, value] = env.split("=");
+      if (value.toUpperCase() === "#ADD-ME") {
+        console.log(
+          `${c.Pink}Add required variable ${c.White}${key} ${c.Pink}to ${c.White}${destPath}${c.Reset}`
+        );
+      }
+    });
+  }
+});

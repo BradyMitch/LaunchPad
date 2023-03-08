@@ -1,7 +1,7 @@
 # Directory: .
 # Create me with the 'npm run init' command.
 
-# Disable me by renaming to -docker-compose.override.yaml
+# Disable/enable me with the 'npm run toggle-dev' command.
 services:
   backend:
     build:

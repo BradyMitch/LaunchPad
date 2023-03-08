@@ -8,6 +8,10 @@
     "up": "node scripts/executeCommand DOCKER_UP",
     "down": "node scripts/executeCommand DOCKER_DOWN",
     "prune": "node scripts/executeCommand DOCKER_PRUNE",
+    "toggle-dev": "node scripts/executeCommand TOGGLE_DEV",
+    "npm-refresh": "node scripts/executeCommand NPM_REFRESH",
+    "npm-refresh:f": "node scripts/executeCommand NPM_REFRESH_FRONTEND",
+    "npm-refresh:b": "node scripts/executeCommand NPM_REFRESH_BACKEND",
     "init": "node scripts/executeCommand INIT",
     "help": "node scripts/help"
   }

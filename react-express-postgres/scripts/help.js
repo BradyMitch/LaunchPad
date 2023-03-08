@@ -26,7 +26,7 @@ fs.readFile(filePath, "utf8", (error, data) => {
   }
 
   // Define a regular expression that matches JSDoc-style "@command" and "@description" comments.
-  const regex = /@command (\w+)\n\s+\* @description (.+)\n/g;
+  const regex = /@command ([-:\w]+)\n\s+\* @description ([^\n]+)/g;
 
   // Loop through all the matches in the file.
   let match;
