@@ -43,6 +43,9 @@ if (toggleToProduction) {
     `\n${c.Cyan}Toggled to local ${c.White}production ${c.Cyan}mode.${c.Reset}`
   );
   console.log(
+    `${c.Cyan}Rebuild the containers for changes to take affect.${c.Reset}`
+  );
+  console.log(
     `\n${c.Grey}This means the local servers will mimic a production environment${c.Reset}`
   );
   console.log(
@@ -52,6 +55,9 @@ if (toggleToProduction) {
   // Toggling to Development.
   console.log(
     `\n${c.Cyan}Toggled to local ${c.White}development ${c.Cyan}mode.${c.Reset}`
+  );
+  console.log(
+    `${c.Cyan}Rebuild the containers for changes to take affect.${c.Reset}`
   );
   console.log(
     `\n${c.Grey}This means the local servers will 'refresh'${c.Reset}`
