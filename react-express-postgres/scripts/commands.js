@@ -43,7 +43,7 @@ exports.DOCKER_DOWN = [
  */
 exports.DOCKER_PRUNE = [
   `echo ${c.Yellow}[PRUNE] ${c.Cyan}Stopping and removing docker containers, images and volumes...${c.Reset}`,
-  "docker compose down --rmi all --volumes --remove-orphans",
+  "docker compose down --rmi all --volumes",
 ];
 
 /**
@@ -53,6 +53,14 @@ exports.DOCKER_PRUNE = [
 exports.TOGGLE_DEV = [
   `echo ${c.Yellow}[TOGGLE-DEV] ${c.Cyan}Toggling local dev/prod mode...${c.Reset}`,
   "node scripts/toggleDevelopmentMode",
+  `echo \n${c.Cyan}Rebuilding frontend and backend...${c.Reset}`,
+  "docker stop frontend",
+  "docker stop backend",
+  "docker rm frontend",
+  "docker rm backend",
+  "docker rmi react-express-postgres-frontend",
+  "docker rmi react-express-postgres-backend",
+  "docker compose up -d frontend backend",
 ];
 
 /**
@@ -91,4 +99,43 @@ exports.NPM_REFRESH_BACKEND = [
   "cd backend",
   "rm -rf node_modules",
   "npm i",
+];
+
+/**
+ * @command rebuild
+ * @description Removes frontend and backend containers and images and re-creates them.
+ */
+exports.REBUILD = [
+  `echo ${c.Yellow}[REBUILD] ${c.Cyan}Rebuilding frontend and backend...${c.Reset}`,
+  "docker stop frontend",
+  "docker stop backend",
+  "docker rm frontend",
+  "docker rm backend",
+  "docker rmi react-express-postgres-frontend",
+  "docker rmi react-express-postgres-backend",
+  "docker compose up -d frontend backend",
+];
+
+/**
+ * @command rebuild:f
+ * @description Removes frontend container and image and re-creates them.
+ */
+exports.REBUILD_FRONTEND = [
+  `echo ${c.Yellow}[REBUILD] ${c.Cyan}Rebuilding frontend...${c.Reset}`,
+  "docker stop frontend",
+  "docker rm frontend",
+  "docker rmi react-express-postgres-frontend",
+  "docker compose up -d frontend",
+];
+
+/**
+ * @command rebuild:b
+ * @description Removes backend container and image and re-creates them.
+ */
+exports.REBUILD_BACKEND = [
+  `echo ${c.Yellow}[REBUILD] ${c.Cyan}Rebuilding backend...${c.Reset}`,
+  "docker stop backend",
+  "docker rm backend",
+  "docker rmi react-express-postgres-backend",
+  "docker compose up -d backend",
 ];

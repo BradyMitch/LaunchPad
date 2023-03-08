@@ -2,7 +2,6 @@
   "name": "react-express-postgres",
   "version": "1.0.0",
   "description": "LaunchPad Starter Application",
-  "main": "index.js",
   "license": "ISC",
   "scripts": {
     "up": "node scripts/executeCommand DOCKER_UP",
@@ -12,6 +11,9 @@
     "npm-refresh": "node scripts/executeCommand NPM_REFRESH",
     "npm-refresh:f": "node scripts/executeCommand NPM_REFRESH_FRONTEND",
     "npm-refresh:b": "node scripts/executeCommand NPM_REFRESH_BACKEND",
+    "rebuild": "node scripts/executeCommand REBUILD",
+    "rebuild:f": "node scripts/executeCommand REBUILD_FRONTEND",
+    "rebuild:b": "node scripts/executeCommand REBUILD_BACKEND",
     "init": "node scripts/executeCommand INIT",
     "help": "node scripts/help"
   }
