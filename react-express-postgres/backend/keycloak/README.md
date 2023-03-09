@@ -1,4 +1,4 @@
-# BcGov SSO Keycloak Integration
+# BCGov SSO Keycloak Integration
 
 For NodeJS:18 Express API
 
