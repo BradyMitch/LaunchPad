@@ -1,5 +1,5 @@
 const express = require("express");
-const { oauthController } = require("../controllers");
+const oauthController = require("./controllers");
 const router = express.Router();
 
 /**
@@ -35,4 +35,3 @@ router.get("/logout", oauthController.logout);
 router.get("/logout/callback", oauthController.logoutCallback);
 
 module.exports = router;
-

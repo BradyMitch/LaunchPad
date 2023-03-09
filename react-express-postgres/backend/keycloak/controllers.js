@@ -1,6 +1,10 @@
-const { FRONTEND_URL, BACKEND_URL } = require("../config");
-const { keycloak } = require("../utils");
-const { getAccessToken, getAuthorizationUrl, getLogoutUrl } = keycloak;
+const { FRONTEND_URL } = require("./configuration");
+
+const {
+  getAccessToken,
+  getAuthorizationUrl,
+  getLogoutUrl,
+} = require("./utils");
 
 /**
  * Prompts the user to login.
@@ -13,8 +17,7 @@ exports.login = async (req, res) => {
     if (req.token) {
       res.redirect(``);
     } else {
-      const baseURL = BACKEND_URL;
-      const authUrl = await getAuthorizationUrl(baseURL);
+      const authUrl = await getAuthorizationUrl();
       res.redirect(authUrl);
     }
   } catch (error) {
@@ -32,8 +35,7 @@ exports.login = async (req, res) => {
 exports.callback = async (req, res) => {
   try {
     const { code } = req.query;
-    const baseURL = BACKEND_URL;
-    const tokens = await getAccessToken({ code, baseURL });
+    const tokens = await getAccessToken(code);
     const redirectUrl = new URL(FRONTEND_URL);
     redirectUrl.searchParams.set("token", tokens.access_token);
     res
@@ -53,8 +55,7 @@ exports.callback = async (req, res) => {
  */
 exports.logout = (req, res) => {
   try {
-    const baseURL = BACKEND_URL;
-    const logoutUrl = getLogoutUrl(baseURL);
+    const logoutUrl = getLogoutUrl();
     res.redirect(logoutUrl);
   } catch (error) {
     console.error("Controller: Error in logout", error);
@@ -71,4 +72,3 @@ exports.logout = (req, res) => {
 exports.logoutCallback = (req, res) => {
   res.cookie("refresh_token", "", { httpOnly: true }).redirect(FRONTEND_URL);
 };
-

@@ -14,7 +14,8 @@ const {
   OIDC_SCOPE,
   OIDC_LOGOUT_REDIRECT_URL,
   OIDC_INTROSPECT_URL,
-} = require("../config");
+  BACKEND_URL,
+} = require("./configuration");
 
 const btoa = (string) => Buffer.from(string).toString("base64");
 
@@ -38,24 +39,24 @@ const decodingJWT = (token) => {
 };
 
 // See https://datatracker.ietf.org/doc/html/rfc6749#section-4.1.1
-const getAuthorizationUrl = async (baseURL) => {
+const getAuthorizationUrl = async () => {
   const params = {
     client_id: SSO_CLIENT_ID,
     response_type: OIDC_RESPONSE_TYPE,
     scope: OIDC_SCOPE,
-    redirect_uri: baseURL + OIDC_REDIRECT_URL,
+    redirect_uri: BACKEND_URL + OIDC_REDIRECT_URL,
   };
 
   return `${OIDC_AUTHORIZATION_URL}?${qs.stringify(params, { encode: false })}`;
 };
 
 // See https://datatracker.ietf.org/doc/html/rfc6749#section-4.1.3
-const getAccessToken = async ({ code, baseURL }) => {
+const getAccessToken = async (code) => {
   const url = OIDC_TOKEN_URL;
   const params = {
     grant_type: OIDC_GRANT_TYPE,
     client_id: SSO_CLIENT_ID,
-    redirect_uri: baseURL + OIDC_REDIRECT_URL,
+    redirect_uri: BACKEND_URL + OIDC_REDIRECT_URL,
     code,
   };
 
@@ -96,10 +97,10 @@ const getUserInfo = async ({ accessToken }) => {
   return data;
 };
 
-const getLogoutUrl = (baseURL) => {
+const getLogoutUrl = () => {
   const params = {
     client_id: SSO_CLIENT_ID,
-    redirect_uri: baseURL + OIDC_LOGOUT_REDIRECT_URL,
+    redirect_uri: BACKEND_URL + OIDC_LOGOUT_REDIRECT_URL,
   };
 
   return `${OIDC_LOGOUT_URL}?${qs.stringify(params, { encode: false })}`;

@@ -3,15 +3,13 @@ const cors = require("cors");
 const rateLimit = require("express-rate-limit");
 const bodyParser = require("body-parser");
 const routers = require("./routes");
-const {
-  keycloakProtect,
-  requestErrorHandler,
-  requestLog,
-} = require("./middleware");
+const { requestErrorHandler, requestLog } = require("./middleware");
 const { FRONTEND_URL } = require("./config");
+const { keycloakInit } = require("./keycloak");
 
 // Define Express App
 const app = express();
+keycloakInit(app);
 
 /**
  * Middleware for parsing request bodies.
@@ -52,18 +50,8 @@ app.use(
   })
 );
 
-/**
- * Sets the default view engine for the application to EJS (Embedded JavaScript).
- *
- * The `view engine` setting is used by Express to automatically render views
- * with the specified engine. By setting it to EJS, you can use EJS templates
- * to generate HTML output in your application.
- */
-app.set("view engine", "ejs");
-
 // Routing
 app.get("/", (req, res) => res.send("Express Server is live!")); // TODO: Replace with swagger docs.
-app.use("/oauth", routers.oauthRouter);
 app.use("/health", routers.healthRouter);
 
 // Included last to ensure any errors thrown by middleware and routes will be caught and handled.
@@ -71,4 +59,3 @@ app.use(requestErrorHandler);
 app.use(requestLog);
 
 module.exports = app;
-

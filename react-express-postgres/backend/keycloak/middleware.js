@@ -1,7 +1,6 @@
-const { keycloak } = require("../utils");
-const { isJWTValid, getUserData } = keycloak;
+const { isJWTValid, getUserData } = require("./utils");
 
-const keycloakProtect = async (req, res, next) => {
+const keycloakMiddleware = async (req, res, next) => {
   const header = req.headers["authorization"];
   if (!header) {
     return res.status(403).json({ error: "No authorization header found" });
@@ -18,4 +17,4 @@ const keycloakProtect = async (req, res, next) => {
   next();
 };
 
-module.exports = keycloakProtect;
+module.exports = keycloakMiddleware;

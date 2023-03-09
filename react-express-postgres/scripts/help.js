@@ -11,7 +11,7 @@ const path = require("path");
 const { colors: c } = require("../utils");
 
 // Define the path to the "commands.js" file.
-const filePath = path.join(__dirname, "commands.js");
+const filePath = path.join(__dirname, "../utils", "commands.js");
 
 console.log(
   `${c.Yellow}Available commands: ${c.White}"npm run <command>"${c.Reset}`
