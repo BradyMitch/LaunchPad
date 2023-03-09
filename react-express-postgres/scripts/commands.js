@@ -1,6 +1,20 @@
 const c = require("./colors");
 
 /**
+ * ADD NEW COMMANDS HERE!
+ *
+ * 1. Create the command with JSDoc-style comment here.
+ * 2. Add to "scripts" of package.json at root level.
+ *
+ * NOTE: Include a JSDoc-style comment with the following properties...
+ * command - The name of the npm script in package.json
+ * description - Displayed in the help command.
+ *
+ * Use 'npm run help' to see a list of commands.
+ * @author Brady Mitchell <braden.mitchell@gov.bc.ca | braden.jr.mitch@gmail.com>
+ */
+
+/**
  * @command init
  * @description Initializes the project files.
  */
