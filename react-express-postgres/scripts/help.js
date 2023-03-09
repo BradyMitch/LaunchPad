@@ -8,7 +8,7 @@
 
 const fs = require("fs");
 const path = require("path");
-const c = require("./colors");
+const { colors: c } = require("../utils");
 
 // Define the path to the "commands.js" file.
 const filePath = path.join(__dirname, "commands.js");

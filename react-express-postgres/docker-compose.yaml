@@ -5,7 +5,7 @@ services:
     tty: true
     build:
       context: .
-      target: prod # Use docker-compose.override.yaml to set to 'dev'.
+      target: prod # Use 'npm run toggle-dev' to toggle between dev and prod.
       dockerfile: ./frontend/Dockerfile
     networks:
       - project-network
@@ -25,7 +25,7 @@ services:
       retries: 5 # Retry the health check up to 5 times before considering the container unhealthy.
     build:
       context: .
-      target: prod # Use docker-compose.override.yaml to set to 'dev'.
+      target: prod # Use 'npm run toggle-dev' to toggle between dev and prod.
       dockerfile: ./backend/Dockerfile
     environment:
       - ENVIRONMENT=${ENVIRONMENT:-local}
@@ -54,7 +54,7 @@ services:
     image: postgres:15.2-alpine
     restart: always
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres}"] # Check if PostgreSQL is ready.
+      test: ["CMD-SHELL", "pg_isready -U ${DATABASE_USER:-postgres}"] # Check if PostgreSQL is ready.
       interval: 15s # Perform the health check every 15 seconds.
       timeout: 5s # Consider the health check a failure if it takes more than 5 seconds.
       retries: 5 # Retry the health check up to 5 times before considering the container unhealthy.
@@ -76,5 +76,3 @@ volumes:
 networks:
   project-network:
     driver: "bridge" # Internal network that allows containers to communicate with each other.
-
-
