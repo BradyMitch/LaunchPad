@@ -8,29 +8,23 @@ const { colors: c } = require("../utils");
  * @param {Object} res - The response object.
  * @param {Function} next - The next middleware function.
  */
-const requestErrorHandler = (error, req, res, next) => {
-  const { message, status } = error;
+const errorHandler = (error, req, res, next) => {
+  const { message } = error;
   const { method, originalUrl } = req;
-
-  const responseJson = {
-    method,
-    originalUrl,
-    status,
-    message,
-    error,
-  };
 
   // Log the error to the console.
   console.error(
-    `${c.Red}REQ ERROR: ${c.Pink}(${status}) [${method}] ${originalUrl}, ${c.Reset}${error}`
+    `${c.Pink}REQ ERROR: ${c.Reset}${c.Red}[${method}] ${originalUrl}: ${c.Reset}${message}.`
   );
 
   // Send response back to the client.
-  if (error.status) res.status(error.status).json(responseJson);
-  else res.status(500).json(responseJson);
+  res.status(500).json({
+    method,
+    originalUrl,
+    message,
+  });
 
   next();
 };
 
-module.exports = requestErrorHandler;
-
+module.exports = errorHandler;

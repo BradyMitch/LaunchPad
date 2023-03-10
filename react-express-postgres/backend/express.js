@@ -3,7 +3,7 @@ const cors = require("cors");
 const rateLimit = require("express-rate-limit");
 const bodyParser = require("body-parser");
 const routers = require("./routes");
-const { requestErrorHandler, requestLog } = require("./middleware");
+const middleware = require("./middleware");
 const { FRONTEND_URL } = require("./config");
 const { keycloakInit } = require("./keycloak");
 
@@ -54,8 +54,8 @@ app.use(
 app.get("/", (req, res) => res.send("Express Server is live!")); // TODO: Replace with swagger docs.
 app.use("/health", routers.healthRouter);
 
-// Included last to ensure any errors thrown by middleware and routes will be caught and handled.
-app.use(requestErrorHandler);
-app.use(requestLog);
+// Error handling middleware.
+// Must be placed after routing so it catches all errors.
+app.use(middleware.errorHandler);
 
 module.exports = app;

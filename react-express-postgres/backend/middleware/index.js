@@ -1,2 +1,1 @@
-exports.requestErrorHandler = require("./requestErrorHandler");
-exports.requestLog = require("./requestLog");
+exports.errorHandler = require("./errorHandler");

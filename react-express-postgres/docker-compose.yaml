@@ -11,6 +11,9 @@ services:
       - project-network
     ports:
       - ${FRONTEND_PORT:-9000}:9000
+    depends_on:
+      backend:
+        condition: service_healthy
 
   ##### BACKEND (NodeJS Express API) #####
   backend:
@@ -19,9 +22,9 @@ services:
     init: true # Properly handles running as PID 1 inside a container. Source: https://github.com/nodejs/docker-node/blob/main/docs/BestPractices.md#handling-kernel-signals
     restart: on-failure
     healthcheck:
-      test: ["CMD", "curl", "-f", "${BACKEND_HEALTHCHECK_URL}"] # Check health endpoint for healthy service.
-      interval: 15s # Perform the health check every 15 seconds.
-      timeout: 5s # Consider the health check a failure if it takes more than 5 seconds.
+      test: ["CMD-SHELL", "node", "/app/healthcheck.js"] # Check health endpoint for healthy service.
+      interval: 30s # Perform the health check every 30 seconds.
+      timeout: 10s # Consider the health check a failure if it takes more than 10 seconds.
       retries: 5 # Retry the health check up to 5 times before considering the container unhealthy.
     build:
       context: .
