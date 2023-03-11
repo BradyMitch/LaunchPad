@@ -1,6 +1,6 @@
 import { Avatar } from '@mui/material';
+import { useAuthService } from 'keycloak';
 import React from 'react';
-import { useAuthService } from 'services/auth';
 
 import StringAvatar from './StringAvatar';
 

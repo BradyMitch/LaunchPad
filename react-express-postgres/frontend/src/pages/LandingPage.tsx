@@ -1,9 +1,9 @@
 import './LandingPage.css';
 
-import { Box, Grid, Stack, Typography } from '@mui/material';
+import { Box, Button, Grid, Stack, Typography } from '@mui/material';
+import { useAuthService } from 'keycloak';
 import { PageLayout } from 'layouts';
 import React from 'react';
-import { useAuthService } from 'services/auth';
 
 const LandingPage = () => {
   const { getLoginURL } = useAuthService();
@@ -19,16 +19,20 @@ const LandingPage = () => {
                   variant="h1"
                   sx={{
                     fontSize: '3rem',
-                    color: '#bf0a55',
+                    color: '#ff4742',
                     fontWeight: 600,
                   }}
                 >
                   Develop Applications Faster
                 </Typography>
                 <Typography variant="h5">LaunchPad Project</Typography>
-                <a className="btn btn__primary" style={{ maxWidth: '150px' }} href={getLoginURL()}>
+                <Button
+                  className="btn"
+                  style={{ maxWidth: '150px' }}
+                  onClick={() => (window.location.href = getLoginURL())}
+                >
                   Login with IDIR
-                </a>
+                </Button>
               </Stack>
             </Grid>
           </Grid>

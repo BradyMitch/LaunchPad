@@ -19,10 +19,10 @@ import {
 } from '@mui/material';
 import ProjectLogo from 'assets/ProjectLogo.png';
 import { ProfileAvatar } from 'components';
+import { useAuthService } from 'keycloak';
 import { MouseEvent, useState } from 'react';
 import React from 'react';
 import { To, useNavigate } from 'react-router';
-import { useAuthService } from 'services/auth';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -40,8 +40,8 @@ const Header = () => {
     setAnchorElNav(null);
   };
 
-  const handleLinkClick = (link: To) => () => {
-    navigate(link);
+  const handleNavigate = (path: To) => () => {
+    navigate(path);
   };
 
   return (
@@ -83,7 +83,7 @@ const Header = () => {
                 marginRight: '1rem',
                 cursor: 'pointer',
               }}
-              onClick={() => handleLinkClick('/')}
+              onClick={() => handleNavigate('/')}
             >
               <img src={ProjectLogo} style={{ maxHeight: '23px' }} alt="Logo for the Project" />
             </Box>
@@ -120,7 +120,7 @@ const Header = () => {
                     display: { xs: 'block', md: 'none' },
                   }}
                 >
-                  <MenuItem onClick={handleLinkClick('/profile')}>
+                  <MenuItem onClick={handleNavigate('/profile')}>
                     <Typography textAlign="center">
                       {user.given_name}
                       &nbsp;
@@ -153,7 +153,7 @@ const Header = () => {
                 marginRight: '1rem',
                 cursor: 'pointer',
               }}
-              onClick={() => handleLinkClick('/')}
+              onClick={() => handleNavigate('/')}
             >
               <img src={ProjectLogo} style={{ maxHeight: '23px' }} alt="Logo for the Project" />
             </Box>
