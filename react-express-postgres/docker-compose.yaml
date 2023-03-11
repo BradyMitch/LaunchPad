@@ -3,6 +3,7 @@ services:
   frontend:
     container_name: frontend
     tty: true
+    restart: on-failure
     build:
       context: .
       target: prod # Use 'npm run toggle-dev' to toggle between dev and prod.
