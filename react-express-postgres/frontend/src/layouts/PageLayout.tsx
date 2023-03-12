@@ -1,4 +1,5 @@
 import { Container } from '@mui/material';
+import { ErrorBoundary } from 'components/common';
 import { ReactNode } from 'react';
 import React from 'react';
 
@@ -18,7 +19,7 @@ const PageLayout = (props: IPageLayout) => {
         justifyContent: 'center',
       }}
     >
-      {children}
+      <ErrorBoundary context="PageLayout">{children}</ErrorBoundary>
     </Container>
   );
 };

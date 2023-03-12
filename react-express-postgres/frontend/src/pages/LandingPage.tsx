@@ -7,7 +7,8 @@ import { PageLayout } from 'layouts';
 import React from 'react';
 
 const LandingPage = () => {
-  const { getLoginURL } = useAuthService();
+  const { state: authState, getLoginURL } = useAuthService();
+  const user = authState.userInfo;
 
   return (
     <Stack className="landing-page">
@@ -27,9 +28,11 @@ const LandingPage = () => {
                   Develop Applications Faster
                 </Typography>
                 <Typography variant="h5">LaunchPad Project</Typography>
-                <Button onClick={() => (window.location.href = getLoginURL())}>
-                  LOGIN WITH IDIR
-                </Button>
+                {!user && (
+                  <Button onClick={() => (window.location.href = getLoginURL())}>
+                    LOGIN WITH IDIR
+                  </Button>
+                )}
               </Stack>
             </Grid>
           </Grid>

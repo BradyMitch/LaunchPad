@@ -1,3 +1,4 @@
+import { ErrorBoundary } from 'components/common';
 import { KeycloakWrapper } from 'keycloak';
 import { Footer, Header } from 'layouts';
 import { LandingPage } from 'pages';
@@ -7,13 +8,17 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 const AppRouter = () => {
   return (
     <Router>
-      <KeycloakWrapper>
-        <Header />
-        <Routes>
-          <Route path="/" element={<LandingPage />} />
-        </Routes>
-        <Footer />
-      </KeycloakWrapper>
+      <ErrorBoundary context="Wrapper">
+        <KeycloakWrapper>
+          <Header />
+          <ErrorBoundary context="Routes">
+            <Routes>
+              <Route path="/" element={<LandingPage />} />
+            </Routes>
+          </ErrorBoundary>
+          <Footer />
+        </KeycloakWrapper>
+      </ErrorBoundary>
     </Router>
   );
 };

@@ -4,6 +4,7 @@
   ***/
   --orange: #ff4742;
   --white: #fff;
+  --error-bg: #f9cdb4;
 
   /*** 
     Font Properties
@@ -12,6 +13,8 @@
   /* Colours */
   --fc-dark: #282524;
   --fc-light: #818181;
+  --fc-error: #c92222;
+  --fc-error-title: #901a16;
 
   /* Sizes */
   --fs-base: 16px;
