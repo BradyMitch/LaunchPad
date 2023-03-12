@@ -1,4 +1,7 @@
 module.exports = {
+  globals: {
+    module: 'readonly',
+  },
   extends: [
     // By extending from a plugin config, we can get recommended rules without having to add them manually.
     'eslint:recommended',
@@ -28,5 +31,14 @@ module.exports = {
     'prettier/prettier': 'warn',
     '@typescript-eslint/no-non-null-assertion': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/ban-types': [
+      'error',
+      {
+        types: {
+          Function: false,
+        },
+        extendDefaults: true,
+      },
+    ],
   },
 };

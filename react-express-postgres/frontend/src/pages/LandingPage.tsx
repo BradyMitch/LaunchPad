@@ -1,6 +1,7 @@
 import './LandingPage.css';
 
-import { Box, Button, Grid, Stack, Typography } from '@mui/material';
+import { Box, Grid, Stack, Typography } from '@mui/material';
+import { Button } from 'components/common';
 import { useAuthService } from 'keycloak';
 import { PageLayout } from 'layouts';
 import React from 'react';
@@ -26,12 +27,8 @@ const LandingPage = () => {
                   Develop Applications Faster
                 </Typography>
                 <Typography variant="h5">LaunchPad Project</Typography>
-                <Button
-                  className="btn"
-                  style={{ maxWidth: '150px' }}
-                  onClick={() => (window.location.href = getLoginURL())}
-                >
-                  Login with IDIR
+                <Button onClick={() => (window.location.href = getLoginURL())}>
+                  LOGIN WITH IDIR
                 </Button>
               </Stack>
             </Grid>

@@ -18,7 +18,7 @@ import {
   Typography,
 } from '@mui/material';
 import ProjectLogo from 'assets/ProjectLogo.png';
-import { ProfileAvatar } from 'components';
+import { InitialsAvatar } from 'components';
 import { useAuthService } from 'keycloak';
 import { MouseEvent, useState } from 'react';
 import React from 'react';
@@ -174,7 +174,7 @@ const Header = () => {
                   disableFocusRipple
                   disableTouchRipple
                 >
-                  <ProfileAvatar size="small" />
+                  <InitialsAvatar />
                   &nbsp; &nbsp;
                   {user.given_name}
                   &nbsp;

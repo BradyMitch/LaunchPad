@@ -1,2 +1,1 @@
-export { default as ProfileAvatar } from './ProfileAvatar';
-export { default as StringAvatar } from './StringAvatar';
+export { default as InitialsAvatar } from './InitialsAvatar';
