@@ -1,10 +1,6 @@
-const { FRONTEND_URL } = require("./configuration");
+const { FRONTEND_URL } = require('./configuration');
 
-const {
-  getAccessToken,
-  getAuthorizationUrl,
-  getLogoutUrl,
-} = require("./utils");
+const { getAccessToken, getAuthorizationUrl, getLogoutUrl } = require('./utils');
 
 /**
  * Prompts the user to login.
@@ -21,7 +17,7 @@ exports.login = async (req, res) => {
       res.redirect(authUrl);
     }
   } catch (error) {
-    console.error("Controller: Error in login", error);
+    console.error('Keycloak: Error in login controller', error);
     res.json({ success: false, error: error.message || error });
   }
 };
@@ -37,12 +33,10 @@ exports.callback = async (req, res) => {
     const { code } = req.query;
     const tokens = await getAccessToken(code);
     const redirectUrl = new URL(FRONTEND_URL);
-    redirectUrl.searchParams.set("token", tokens.access_token);
-    res
-      .cookie("refresh_token", tokens.refresh_token, { httpOnly: true })
-      .redirect(redirectUrl);
+    redirectUrl.searchParams.set('token', tokens.access_token);
+    res.cookie('refresh_token', tokens.refresh_token, { httpOnly: true }).redirect(redirectUrl);
   } catch (error) {
-    console.error("Controller: Error in login callback", error);
+    console.error('Keycloak: Error in login callback controller', error);
     res.json({ success: false, error: error.message || error });
   }
 };
@@ -58,7 +52,7 @@ exports.logout = (req, res) => {
     const logoutUrl = getLogoutUrl();
     res.redirect(logoutUrl);
   } catch (error) {
-    console.error("Controller: Error in logout", error);
+    console.error('Keycloak: Error in logout controller', error);
     res.json({ success: false, error: error.message || error });
   }
 };
@@ -70,5 +64,9 @@ exports.logout = (req, res) => {
  * @route /oauth/logout/callback
  */
 exports.logoutCallback = (req, res) => {
-  res.cookie("refresh_token", "", { httpOnly: true }).redirect(FRONTEND_URL);
+  try {
+    res.cookie('refresh_token', '', { httpOnly: true }).redirect(FRONTEND_URL);
+  } catch (error) {
+    console.error('Keycloak: Error in logout callback controller', error);
+  }
 };

@@ -1,5 +1,5 @@
-const axios = require("axios");
-const qs = require("qs");
+const axios = require('axios');
+const qs = require('qs');
 
 const {
   SSO_CLIENT_ID,
@@ -15,22 +15,22 @@ const {
   OIDC_LOGOUT_REDIRECT_URL,
   OIDC_INTROSPECT_URL,
   BACKEND_URL,
-} = require("./configuration");
+} = require('./configuration');
 
-const btoa = (string) => Buffer.from(string).toString("base64");
+const btoa = (string) => Buffer.from(string).toString('base64');
 
 const decodeValue = (base64String) => {
   try {
-    return JSON.parse(Buffer.from(base64String, "base64").toString("ascii"));
+    return JSON.parse(Buffer.from(base64String, 'base64').toString('ascii'));
   } catch {
-    return "";
+    return '';
   }
 };
 
 const decodingJWT = (token) => {
   if (!token) return null;
 
-  const [header, payload] = token.split(".");
+  const [header, payload] = token.split('.');
 
   return {
     header: decodeValue(header),
@@ -62,7 +62,7 @@ const getAccessToken = async (code) => {
 
   const config = {
     url,
-    method: "POST",
+    method: 'POST',
     data: qs.stringify(params),
   };
   if (SSO_CLIENT_SECRET) {
@@ -88,7 +88,7 @@ const getAccessToken = async (code) => {
 const getUserInfo = async ({ accessToken }) => {
   const { data } = await axios({
     url: OIDC_USER_INFO_URL,
-    method: "get",
+    method: 'get',
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },
@@ -107,20 +107,20 @@ const getLogoutUrl = () => {
 };
 
 const isJWTValid = async (jwt) => {
-  let headersList = {
-    Accept: "*/*",
-    "Content-Type": "application/x-www-form-urlencoded",
+  const headersList = {
+    Accept: '*/*',
+    'Content-Type': 'application/x-www-form-urlencoded',
   };
 
-  let bodyContent = `client_id=${SSO_CLIENT_ID}&client_secret=${SSO_CLIENT_SECRET}&token=${jwt}`;
+  const bodyContent = `client_id=${SSO_CLIENT_ID}&client_secret=${SSO_CLIENT_SECRET}&token=${jwt}`;
 
-  let response = await fetch(OIDC_INTROSPECT_URL, {
-    method: "POST",
+  const response = await fetch(OIDC_INTROSPECT_URL, {
+    method: 'POST',
     body: bodyContent,
     headers: headersList,
   });
 
-  let data = await response.json();
+  const data = await response.json();
   return data.active;
 };
 

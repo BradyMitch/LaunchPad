@@ -1,11 +1,11 @@
-const express = require("express");
-const cors = require("cors");
-const rateLimit = require("express-rate-limit");
-const bodyParser = require("body-parser");
-const routers = require("./routes");
-const middleware = require("./middleware");
-const { FRONTEND_URL } = require("./config");
-const { keycloakInit } = require("./keycloak");
+const express = require('express');
+const cors = require('cors');
+const rateLimit = require('express-rate-limit');
+const bodyParser = require('body-parser');
+const routers = require('./routes');
+const middleware = require('./middleware');
+const { FRONTEND_URL } = require('./config');
+const { keycloakInit } = require('./keycloak');
 
 // Define Express App
 const app = express();
@@ -30,7 +30,7 @@ app.use(
   cors({
     origin: FRONTEND_URL,
     credentials: true,
-  })
+  }),
 );
 
 /**
@@ -47,12 +47,12 @@ app.use(
     max: 100,
     standardHeaders: true,
     legacyHeaders: false,
-  })
+  }),
 );
 
 // Routing
-app.get("/", (req, res) => res.send("Express Server is live!")); // TODO: Replace with swagger docs.
-app.use("/health", routers.healthRouter);
+app.get('/', (req, res) => res.send('Express Server is live!')); // TODO: Replace with swagger docs.
+app.use('/health', routers.healthRouter);
 
 // Error handling middleware.
 // Must be placed after routing so it catches all errors.
