@@ -53,8 +53,14 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
         );
       } else {
         return (
-          <Box sx={{ maxWidth: '50%', display: 'flex', alignItems: 'center' }}>
-            <Stack spacing={2} sx={{ display: 'flex', alignItems: 'center' }}>
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <Stack spacing={2} sx={{ display: 'flex', alignItems: 'center', maxWidth: '50%' }}>
               <Box
                 sx={{
                   bgcolor: 'var(--error-bg)',

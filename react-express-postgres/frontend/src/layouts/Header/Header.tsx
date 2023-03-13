@@ -1,4 +1,5 @@
 import {
+  ErrorOutline,
   KeyboardArrowDown as DownIcon,
   Logout as LogoutIcon,
   Menu as MenuIcon,
@@ -29,6 +30,7 @@ const Header = () => {
   const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = useState<HTMLElement | null>(null);
   const [anchorElUserDropdown, setAnchorElUserDropdown] = useState<HTMLElement | null>(null);
+  const [testError, setTestError] = useState(false);
   const { state: authState, getLogoutURL } = useAuthService();
 
   const user = authState.userInfo;
@@ -43,6 +45,11 @@ const Header = () => {
 
   const handleNavigate = (path: To) => () => {
     navigate(path);
+  };
+
+  const TestError = () => {
+    throw new Error('An error was thrown to test ErrorBoundary.');
+    return <></>;
   };
 
   const LogoAndTitle = () => {
@@ -73,11 +80,17 @@ const Header = () => {
         PaperProps={{
           style: {
             transformOrigin: 'left',
-            transform: 'translateX(-25px)',
+            transform: 'translateX(-50px)',
           },
         }}
       >
         <Divider />
+        <MenuItem onClick={() => setTestError(true)}>
+          <ListItemIcon>
+            <ErrorOutline />
+          </ListItemIcon>
+          <ListItemText>Test Error</ListItemText>
+        </MenuItem>
         <MenuItem onClick={() => (window.location.href = getLogoutURL())}>
           <ListItemIcon>
             <LogoutIcon />
@@ -169,6 +182,7 @@ const Header = () => {
           </Box>
         </Toolbar>
       </AppBar>
+      {testError && <TestError />}
     </Box>
   );
 };

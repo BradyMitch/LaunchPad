@@ -19,7 +19,7 @@ const PageLayout = (props: IPageLayout) => {
         justifyContent: 'center',
       }}
     >
-      <ErrorBoundary context="PageLayout">{children}</ErrorBoundary>
+      <ErrorBoundary context="PageLayout.tsx">{children}</ErrorBoundary>
     </Container>
   );
 };
