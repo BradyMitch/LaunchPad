@@ -1,8 +1,6 @@
-import { createContext, ReactNode } from 'react';
-import React from 'react';
+import BaseProvider from 'providers/BaseProvider';
+import React, { createContext, ReactNode } from 'react';
 import { initialState, reducer } from 'services/users/userReducer';
-
-import BaseProvider from './BaseProvider';
 
 export const UserContext = createContext(initialState);
 
@@ -10,8 +8,7 @@ interface IUserProvider {
   children: ReactNode;
 }
 
-const UserProvider = (props: IUserProvider) => {
-  const { children } = props;
+const UserProvider = ({ children }: IUserProvider) => {
   return (
     <BaseProvider Context={UserContext} initialState={initialState} reducer={reducer}>
       {children}

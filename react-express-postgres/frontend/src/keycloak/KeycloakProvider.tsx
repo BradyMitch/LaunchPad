@@ -1,6 +1,6 @@
 import React, { createContext, ReactNode, useReducer } from 'react';
 
-import { AuthAction, AuthState, initialState, reducer } from './services/authReducer';
+import { AuthAction, AuthState, initialState, reducer } from './service/authReducer';
 
 // Create an initial context with initialState.
 export const AuthContext = createContext<AuthState>(initialState);

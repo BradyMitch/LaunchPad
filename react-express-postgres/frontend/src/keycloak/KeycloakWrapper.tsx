@@ -1,6 +1,6 @@
 import React, { ReactNode, useEffect } from 'react';
 
-import useAuthService from './services/useAuthService';
+import useAuthService from './service/useAuthService';
 
 interface IKeycloakWrapper {
   children: ReactNode;

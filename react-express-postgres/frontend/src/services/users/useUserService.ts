@@ -1,8 +1,15 @@
 import { UserContext } from 'providers/UserProvider';
 import { useContext, useMemo } from 'react';
 
-import { GET_USERS } from './userActions';
+import UserActionType from './userActions';
 
+const { GET_USERS } = UserActionType;
+
+/**
+ * A custom hook that provides users-related functionality to other components.
+ * @returns {Object} - An object containing users-related functions
+ * and the current users state.
+ */
 const useUserService = () => {
   const { state, dispatch } = useContext<any>(UserContext);
 

@@ -20,9 +20,10 @@ import {
 import ProjectLogo from 'assets/ProjectLogo.png';
 import { InitialsAvatar } from 'components';
 import { useAuthService } from 'keycloak';
-import { MouseEvent, useState } from 'react';
-import React from 'react';
+import React, { MouseEvent, useState } from 'react';
 import { To, useNavigate } from 'react-router';
+
+import sx from './styles';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -44,52 +45,56 @@ const Header = () => {
     navigate(path);
   };
 
-  return (
-    <Box
-      sx={{
-        border: 'solid',
-        borderColor: 'header.border',
-        borderWidth: '0px 0px 0.3vh 0px',
-        minHeight: '6.5vh',
-      }}
-    >
-      <AppBar
-        position="static"
-        color="transparent"
-        elevation={0}
-        sx={{
-          maxWidth: '1096px',
-          margin: 'auto',
+  const LogoAndTitle = () => {
+    return (
+      <>
+        <Box sx={sx.logoBox} onClick={() => handleNavigate('/')}>
+          <img src={ProjectLogo} style={{ maxHeight: '23px' }} alt="Logo for the Project" />
+        </Box>
+        <Typography variant="h6" component="div" sx={{ fontWeight: 'bold', flexGrow: 1 }}>
+          LaunchPad Project
+        </Typography>
+      </>
+    );
+  };
+
+  const AccountDropdownMenu = () => {
+    return (
+      <Menu
+        anchorEl={anchorElUserDropdown}
+        open={!!anchorElUserDropdown}
+        onClose={() => {
+          setAnchorElUserDropdown(null);
+        }}
+        anchorOrigin={{
+          horizontal: 'center',
+          vertical: 'bottom',
+        }}
+        PaperProps={{
+          style: {
+            transformOrigin: 'left',
+            transform: 'translateX(-25px)',
+          },
         }}
       >
+        <Divider />
+        <MenuItem onClick={() => (window.location.href = getLogoutURL())}>
+          <ListItemIcon>
+            <LogoutIcon />
+          </ListItemIcon>
+          <ListItemText>Logout</ListItemText>
+        </MenuItem>
+      </Menu>
+    );
+  };
+
+  return (
+    <Box sx={sx.headerContainer}>
+      <AppBar position="static" color="transparent" elevation={0} sx={sx.appBar}>
         <Toolbar>
-          <Box
-            sx={{
-              flexGrow: 1,
-              display: { xs: 'flex', md: 'none' },
-              alignItems: 'center',
-            }}
-          >
-            <Box
-              sx={{
-                backgroundColor: 'header.border',
-                borderRadius: '10px',
-                height: '50px !important',
-                width: '50px !important',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                padding: 0,
-                marginRight: '1rem',
-                cursor: 'pointer',
-              }}
-              onClick={() => handleNavigate('/')}
-            >
-              <img src={ProjectLogo} style={{ maxHeight: '23px' }} alt="Logo for the Project" />
-            </Box>
-            <Typography variant="h6" component="div" sx={{ fontWeight: 'bold', flexGrow: 1 }}>
-              LaunchPad Project
-            </Typography>
+          {/** SMALL SCREEN */}
+          <Box sx={sx.smallScreenToolbar}>
+            <LogoAndTitle />
             {user ? (
               <>
                 <IconButton
@@ -133,33 +138,9 @@ const Header = () => {
               ''
             )}
           </Box>
-          <Box
-            sx={{
-              flexGrow: 1,
-              display: { xs: 'none', md: 'flex' },
-              alignItems: 'center',
-            }}
-          >
-            <Box
-              sx={{
-                backgroundColor: 'header.border',
-                borderRadius: '10px',
-                height: '50px',
-                width: '50px',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                padding: 0,
-                marginRight: '1rem',
-                cursor: 'pointer',
-              }}
-              onClick={() => handleNavigate('/')}
-            >
-              <img src={ProjectLogo} style={{ maxHeight: '23px' }} alt="Logo for the Project" />
-            </Box>
-            <Typography variant="h6" component="div" sx={{ fontWeight: 'bold', flexGrow: 1 }}>
-              LaunchPad Project
-            </Typography>
+          {/** LARGE SCREEN */}
+          <Box sx={sx.largeScreenToolbar}>
+            <LogoAndTitle />
             {user ? (
               <Stack direction="row" spacing={3}>
                 <Button
@@ -184,31 +165,7 @@ const Header = () => {
             ) : (
               ''
             )}
-            <Menu
-              anchorEl={anchorElUserDropdown}
-              open={!!anchorElUserDropdown}
-              onClose={() => {
-                setAnchorElUserDropdown(null);
-              }}
-              anchorOrigin={{
-                horizontal: 'center',
-                vertical: 'bottom',
-              }}
-              PaperProps={{
-                style: {
-                  transformOrigin: 'left',
-                  transform: 'translateX(-100px)',
-                },
-              }}
-            >
-              <Divider />
-              <MenuItem onClick={() => (window.location.href = getLogoutURL())}>
-                <ListItemIcon>
-                  <LogoutIcon />
-                </ListItemIcon>
-                <ListItemText>Logout</ListItemText>
-              </MenuItem>
-            </Menu>
+            <AccountDropdownMenu />
           </Box>
         </Toolbar>
       </AppBar>
