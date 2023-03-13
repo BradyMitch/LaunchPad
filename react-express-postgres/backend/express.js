@@ -2,14 +2,19 @@ const express = require('express');
 const cors = require('cors');
 const rateLimit = require('express-rate-limit');
 const bodyParser = require('body-parser');
+const swaggerUi = require('swagger-ui-express');
+const swaggerJSDoc = require('swagger-jsdoc');
 const routers = require('./routes');
 const middleware = require('./middleware');
-const { FRONTEND_URL } = require('./config');
+const { OPENAPI_OPTIONS, CORS_OPTIONS, RATE_LIMIT_OPTIONS, BACKEND_URL } = require('./config');
 const { keycloakInit } = require('./keycloak');
 
 // Define Express App
 const app = express();
 keycloakInit(app);
+
+// Swagger OpenAPI configuration.
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerJSDoc(OPENAPI_OPTIONS)));
 
 /**
  * Middleware for parsing request bodies.
@@ -20,39 +25,30 @@ keycloakInit(app);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-/**
- * Middleware for enabling Cross-Origin Resource Sharing (CORS) on the server.
- * @module cors
- * @property {string|string[]} origin - The allowed origins for CORS requests.
- * @property {boolean} credentials - Whether to allow credentials to be included in CORS requests.
- */
-app.use(
-  cors({
-    origin: FRONTEND_URL,
-    credentials: true,
-  }),
-);
-
-/**
- * Middleware for rate-limiting requests on the server.
- * @module express-rate-limit
- * @property {number} windowMs - The length of the rate-limiting window in milliseconds.
- * @property {number} max - The maximum number of requests allowed per window per IP address.
- * @property {boolean} headers - Whether to include rate limit info in the `RateLimit-*` headers.
- * @property {boolean} legacy - Whether to include rate limit info in the `X-RateLimit-*` headers (deprecated).
- */
-app.use(
-  rateLimit({
-    windowMs: 2 * 1000, // 2 seconds
-    max: 100,
-    standardHeaders: true,
-    legacyHeaders: false,
-  }),
-);
+app.use(cors(CORS_OPTIONS));
+app.use(rateLimit(RATE_LIMIT_OPTIONS));
 
 // Routing
-app.get('/', (req, res) => res.send('Express Server is live!')); // TODO: Replace with swagger docs.
 app.use('/health', routers.healthRouter);
+
+// Display message on index page.
+app.use('/', (req, res) =>
+  res.send(
+    `<html>
+      <head>
+        <style>
+          h3, body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+          body { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        </style>
+      </head>
+      <body>
+        <h3>Application is Live!</h3>
+        View the documentation
+        <a href="${BACKEND_URL}/docs">HERE</a>
+      </body>
+    </html>`,
+  ),
+);
 
 // Error handling middleware.
 // Must be placed after routing so it catches all errors.

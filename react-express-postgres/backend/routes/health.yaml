@@ -1,0 +1,14 @@
+paths:
+  /health:
+    get:
+      tags:
+        - Health
+      summary: Get application health status.
+      operationId: getHealthStatus
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
