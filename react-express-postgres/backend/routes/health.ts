@@ -1,18 +1,19 @@
 import express from 'express';
 const router = express.Router();
 
-import { Request, Response } from 'express';
 import { healthController } from '../controllers';
 
 /**
+ * Check if application is healthy.
+ * @author Brady Mitchell <braden.mitchell@gov.bc.ca | braden.jr.mitch@gmail.com>
  * @method GET
  * @route /health
  */
-router.get('/', (req: Request, res: Response) => {
-  res.send('Application is healthy!');
-});
+router.get('/', healthController.isHealthy);
 
 /**
+ * Check if application has a connection to the database.
+ * @author Brady Mitchell <braden.mitchell@gov.bc.ca | braden.jr.mitch@gmail.com>
  * @method GET
  * @route /health/ready
  */

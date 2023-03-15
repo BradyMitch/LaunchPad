@@ -32,6 +32,7 @@ app.use(rateLimit(RATE_LIMIT_OPTIONS));
 
 // Routing
 app.use('/health', routers.healthRouter);
+app.use('/config', routers.configRouter);
 
 // Display message on index page.
 app.use('/', (req, res) =>
