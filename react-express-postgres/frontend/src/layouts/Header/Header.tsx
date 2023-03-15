@@ -1,5 +1,6 @@
 import {
-  ErrorOutline,
+  DataObject as DataObjectIcon,
+  ErrorOutline as ErrorIcon,
   KeyboardArrowDown as DownIcon,
   Logout as LogoutIcon,
   Menu as MenuIcon,
@@ -32,6 +33,7 @@ const Header = () => {
   const [anchorElUserDropdown, setAnchorElUserDropdown] = useState<HTMLElement | null>(null);
   const [testError, setTestError] = useState(false);
   const { state: authState, getLogoutURL } = useAuthService();
+  const configuration = (window as any).configuration;
 
   const user = authState.userInfo;
 
@@ -80,14 +82,20 @@ const Header = () => {
         PaperProps={{
           style: {
             transformOrigin: 'left',
-            transform: 'translateX(-50px)',
+            transform: 'translateX(-70px)',
           },
         }}
       >
         <Divider />
+        <MenuItem onClick={() => alert(JSON.stringify(configuration))}>
+          <ListItemIcon>
+            <DataObjectIcon />
+          </ListItemIcon>
+          <ListItemText>Alert Config</ListItemText>
+        </MenuItem>
         <MenuItem onClick={() => setTestError(true)}>
           <ListItemIcon>
-            <ErrorOutline />
+            <ErrorIcon />
           </ListItemIcon>
           <ListItemText>Test Error</ListItemText>
         </MenuItem>
