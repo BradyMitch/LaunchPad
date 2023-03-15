@@ -1,3 +1,6 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 // Environment variables set in docker-compose file.
 const { NODE_ENV, ENVIRONMENT, FRONTEND_PORT, FRONTEND_URL, BACKEND_URL, PORT } = process.env;
 
@@ -53,6 +56,7 @@ const OPENAPI_OPTIONS = {
 // Exported configuration values.
 export default {
   PORT: PORT ?? 9009,
+  NODE_VERSION: process.version,
   NODE_ENV,
   ENVIRONMENT,
   FRONTEND_URL: frontendUrl,

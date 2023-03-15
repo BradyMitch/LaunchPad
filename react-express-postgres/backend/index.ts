@@ -1,15 +1,15 @@
-import dotenv from 'dotenv';
-dotenv.config();
-
 import app from './express';
-import { colors as c } from './utils';
 import config from './config';
+const { PORT } = config;
+import { logMessages } from './utils';
+const { SERVER_START, UTC_DATE_TIME, PACIFIC_DATE_TIME, CURRENT_NODE_VERSION } = logMessages;
 
-app.listen(config.PORT, () => {
+app.listen(PORT, () => {
   try {
-    console.info(
-      `${c.LBlue}Express Server started on port ${c.Reset}${config.PORT}${c.LBlue}.${c.Reset}`,
-    );
+    console.info(SERVER_START);
+    console.info(CURRENT_NODE_VERSION);
+    console.info(UTC_DATE_TIME);
+    console.info(PACIFIC_DATE_TIME);
   } catch (error) {
     console.error(error);
   }
