@@ -1,6 +1,7 @@
-const http = require('http');
-const { colors: c } = require('./utils');
-const { BACKEND_URL, PORT, ENVIRONMENT } = require('configuration');
+import http from 'http';
+import { colors as c } from './utils';
+import config from './config';
+const { BACKEND_URL, PORT, ENVIRONMENT } = config;
 
 let backendUrl = BACKEND_URL;
 if (ENVIRONMENT && ENVIRONMENT === 'local') backendUrl = `http://localhost:${PORT}`;

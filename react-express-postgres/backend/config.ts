@@ -1,13 +1,5 @@
 // Environment variables set in docker-compose file.
-const {
-  NODE_ENV,
-  ENVIRONMENT,
-  FRONTEND_PORT,
-  FRONTEND_URL,
-  BACKEND_URL,
-  PORT,
-  SSO_AUTH_SERVER_URL,
-} = process.env;
+const { NODE_ENV, ENVIRONMENT, FRONTEND_PORT, FRONTEND_URL, BACKEND_URL, PORT } = process.env;
 
 // Use production urls unless ENVIRONMENT === "local".
 let frontendUrl = FRONTEND_URL;
@@ -59,14 +51,13 @@ const OPENAPI_OPTIONS = {
 };
 
 // Exported configuration values.
-const configuration = {
+export default {
   PORT: PORT ?? 9009,
   NODE_ENV,
+  ENVIRONMENT,
   FRONTEND_URL: frontendUrl,
   BACKEND_URL: backendUrl,
   CORS_OPTIONS,
   RATE_LIMIT_OPTIONS,
   OPENAPI_OPTIONS,
 };
-
-module.exports = configuration;

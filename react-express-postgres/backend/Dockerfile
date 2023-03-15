@@ -28,13 +28,30 @@ RUN npm i
 CMD ["npm", "run", "dev"]
 
 # ================================= #
-# 🐳🐳       PROD BUILD      🐳🐳 #
+# 🐳🐳   [1/2] PROD BUILD    🐳🐳 #
 # ================================= #
-FROM base as prod
+FROM base as prod-build
+
+# Npm install typescript for build command.
+RUN npm i typescript@4.9.5
+
+# Convert typescript code to JavaScript.
+RUN npm run build
+
+# ================================= #
+# 🐳🐳       [2/2] PROD      🐳🐳 #
+# ================================= #
+FROM node:18.14.2-bullseye-slim as prod
 ENV NODE_ENV=production
 
+WORKDIR /app
+
 # Npm install packages. Omits dev dependencies when NODE_ENV=production
+COPY --from=prod-build /app/package.json ./package.json
 RUN npm i
 
+# Copy build files.
+COPY --from=prod-build /app/dist ./dist
+
 # Node Entrypoint.
-CMD ["node","index.js"]
+CMD ["node","dist/index.js"]

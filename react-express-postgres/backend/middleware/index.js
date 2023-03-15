@@ -1,1 +1,0 @@
-exports.errorHandler = require("./errorHandler");

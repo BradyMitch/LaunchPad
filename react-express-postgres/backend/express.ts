@@ -1,13 +1,15 @@
-const express = require('express');
-const cors = require('cors');
-const rateLimit = require('express-rate-limit');
-const bodyParser = require('body-parser');
-const swaggerUi = require('swagger-ui-express');
-const swaggerJSDoc = require('swagger-jsdoc');
-const routers = require('./routes');
-const middleware = require('./middleware');
-const { OPENAPI_OPTIONS, CORS_OPTIONS, RATE_LIMIT_OPTIONS, BACKEND_URL } = require('./config');
-const { keycloakInit } = require('./keycloak');
+import express from 'express';
+import cors from 'cors';
+import rateLimit from 'express-rate-limit';
+import bodyParser from 'body-parser';
+import swaggerUi from 'swagger-ui-express';
+import swaggerJSDoc from 'swagger-jsdoc';
+import * as routers from './routes';
+import * as middleware from './middleware';
+import config from './config';
+import { keycloakInit } from './keycloak';
+
+const { OPENAPI_OPTIONS, CORS_OPTIONS, RATE_LIMIT_OPTIONS, BACKEND_URL } = config;
 
 // Define Express App
 const app = express();
@@ -54,4 +56,4 @@ app.use('/', (req, res) =>
 // Must be placed after routing so it catches all errors.
 app.use(middleware.errorHandler);
 
-module.exports = app;
+export default app;

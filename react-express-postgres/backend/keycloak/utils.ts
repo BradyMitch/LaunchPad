@@ -1,6 +1,7 @@
-const axios = require('axios');
-const qs = require('qs');
+import axios from 'axios';
+import qs from 'qs';
 
+import configuration from './configuration';
 const {
   SSO_CLIENT_ID,
   SSO_CLIENT_SECRET,
@@ -15,11 +16,11 @@ const {
   OIDC_LOGOUT_REDIRECT_URL,
   OIDC_INTROSPECT_URL,
   BACKEND_URL,
-} = require('./configuration');
+} = configuration;
 
-const btoa = (string) => Buffer.from(string).toString('base64');
+const btoa = (string: string) => Buffer.from(string).toString('base64');
 
-const decodeValue = (base64String) => {
+const decodeValue = (base64String: string) => {
   try {
     return JSON.parse(Buffer.from(base64String, 'base64').toString('ascii'));
   } catch {
@@ -27,7 +28,7 @@ const decodeValue = (base64String) => {
   }
 };
 
-const decodingJWT = (token) => {
+const decodingJWT = (token: string) => {
   if (!token) return null;
 
   const [header, payload] = token.split('.');
@@ -39,7 +40,7 @@ const decodingJWT = (token) => {
 };
 
 // See https://datatracker.ietf.org/doc/html/rfc6749#section-4.1.1
-const getAuthorizationUrl = async () => {
+export const getAuthorizationUrl = async () => {
   const params = {
     client_id: SSO_CLIENT_ID,
     response_type: OIDC_RESPONSE_TYPE,
@@ -51,7 +52,7 @@ const getAuthorizationUrl = async () => {
 };
 
 // See https://datatracker.ietf.org/doc/html/rfc6749#section-4.1.3
-const getAccessToken = async (code) => {
+export const getAccessToken = async (code: unknown) => {
   const url = OIDC_TOKEN_URL;
   const params = {
     grant_type: OIDC_GRANT_TYPE,
@@ -60,11 +61,13 @@ const getAccessToken = async (code) => {
     code,
   };
 
-  const config = {
+  let config = {
     url,
     method: 'POST',
     data: qs.stringify(params),
+    headers: {},
   };
+
   if (SSO_CLIENT_SECRET) {
     config.headers = {
       Authorization: `Basic ${btoa(`${SSO_CLIENT_ID}:${SSO_CLIENT_SECRET}`)}`,
@@ -85,7 +88,11 @@ const getAccessToken = async (code) => {
   return data;
 };
 
-const getUserInfo = async ({ accessToken }) => {
+interface IGetUserInfo {
+  accessToken: string;
+}
+
+export const getUserInfo = async ({ accessToken }: IGetUserInfo) => {
   const { data } = await axios({
     url: OIDC_USER_INFO_URL,
     method: 'get',
@@ -97,7 +104,7 @@ const getUserInfo = async ({ accessToken }) => {
   return data;
 };
 
-const getLogoutUrl = () => {
+export const getLogoutUrl = () => {
   const params = {
     client_id: SSO_CLIENT_ID,
     redirect_uri: BACKEND_URL + OIDC_LOGOUT_REDIRECT_URL,
@@ -106,7 +113,7 @@ const getLogoutUrl = () => {
   return `${OIDC_LOGOUT_URL}?${qs.stringify(params, { encode: false })}`;
 };
 
-const isJWTValid = async (jwt) => {
+export const isJWTValid = async (jwt: string) => {
   const headersList = {
     Accept: '*/*',
     'Content-Type': 'application/x-www-form-urlencoded',
@@ -124,19 +131,10 @@ const isJWTValid = async (jwt) => {
   return data.active;
 };
 
-const getUserData = (accessToken) => {
+export const getUserData = (accessToken: string) => {
   const data = decodingJWT(accessToken);
   if (data) {
     return data.payload;
   }
   return null;
-};
-
-module.exports = {
-  getAuthorizationUrl,
-  getAccessToken,
-  getUserInfo,
-  getLogoutUrl,
-  isJWTValid,
-  getUserData,
 };

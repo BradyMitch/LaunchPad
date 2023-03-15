@@ -1,6 +1,7 @@
-const express = require("express");
-const oauthController = require("./controllers");
+import express from 'express';
 const router = express.Router();
+
+import * as oauthController from './controllers';
 
 /**
  * Prompts the user to login.
@@ -8,7 +9,7 @@ const router = express.Router();
  * @method GET
  * @route /oauth/login
  */
-router.get("/login", oauthController.login);
+router.get('/login', oauthController.login);
 
 /**
  *
@@ -16,7 +17,7 @@ router.get("/login", oauthController.login);
  * @method GET
  * @route /oauth/login/callback
  */
-router.get("/login/callback", oauthController.callback);
+router.get('/login/callback', oauthController.callback);
 
 /**
  *
@@ -24,7 +25,7 @@ router.get("/login/callback", oauthController.callback);
  * @method GET
  * @route /oauth/logout
  */
-router.get("/logout", oauthController.logout);
+router.get('/logout', oauthController.logout);
 
 /**
  *
@@ -32,6 +33,6 @@ router.get("/logout", oauthController.logout);
  * @method GET
  * @route /oauth/logout/callback
  */
-router.get("/logout/callback", oauthController.logoutCallback);
+router.get('/logout/callback', oauthController.logoutCallback);
 
-module.exports = router;
+export default router;

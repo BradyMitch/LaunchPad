@@ -1,6 +1,6 @@
-const { FRONTEND_URL } = require('./configuration');
-
-const { getAccessToken, getAuthorizationUrl, getLogoutUrl } = require('./utils');
+import config from './configuration';
+import { Request, Response } from 'express';
+import { getAccessToken, getAuthorizationUrl, getLogoutUrl } from './utils';
 
 /**
  * Prompts the user to login.
@@ -8,7 +8,7 @@ const { getAccessToken, getAuthorizationUrl, getLogoutUrl } = require('./utils')
  * @method GET
  * @route /oauth/login
  */
-exports.login = async (req, res) => {
+export const login = async (req: Request, res: Response) => {
   try {
     if (req.token) {
       res.redirect(``);
@@ -16,7 +16,7 @@ exports.login = async (req, res) => {
       const authUrl = await getAuthorizationUrl();
       res.redirect(authUrl);
     }
-  } catch (error) {
+  } catch (error: any) {
     console.error('Keycloak: Error in login controller', error);
     res.json({ success: false, error: error.message || error });
   }
@@ -28,14 +28,16 @@ exports.login = async (req, res) => {
  * @method GET
  * @route /oauth/login/callback
  */
-exports.callback = async (req, res) => {
+export const callback = async (req: Request, res: Response) => {
   try {
     const { code } = req.query;
     const tokens = await getAccessToken(code);
-    const redirectUrl = new URL(FRONTEND_URL);
+    const redirectUrl = new URL(config.FRONTEND_URL ?? '');
     redirectUrl.searchParams.set('token', tokens.access_token);
-    res.cookie('refresh_token', tokens.refresh_token, { httpOnly: true }).redirect(redirectUrl);
-  } catch (error) {
+    res
+      .cookie('refresh_token', tokens.refresh_token, { httpOnly: true })
+      .redirect(redirectUrl.toString());
+  } catch (error: any) {
     console.error('Keycloak: Error in login callback controller', error);
     res.json({ success: false, error: error.message || error });
   }
@@ -47,11 +49,11 @@ exports.callback = async (req, res) => {
  * @method GET
  * @route /oauth/logout
  */
-exports.logout = (req, res) => {
+export const logout = (req: Request, res: Response) => {
   try {
     const logoutUrl = getLogoutUrl();
     res.redirect(logoutUrl);
-  } catch (error) {
+  } catch (error: any) {
     console.error('Keycloak: Error in logout controller', error);
     res.json({ success: false, error: error.message || error });
   }
@@ -63,9 +65,9 @@ exports.logout = (req, res) => {
  * @method GET
  * @route /oauth/logout/callback
  */
-exports.logoutCallback = (req, res) => {
+export const logoutCallback = (req: Request, res: Response) => {
   try {
-    res.cookie('refresh_token', '', { httpOnly: true }).redirect(FRONTEND_URL);
+    res.cookie('refresh_token', '', { httpOnly: true }).redirect(config.FRONTEND_URL ?? '');
   } catch (error) {
     console.error('Keycloak: Error in logout callback controller', error);
   }

@@ -1,4 +1,5 @@
-const { colors: c } = require("../utils");
+import { Request, Response, NextFunction } from 'express';
+import { colors as c } from '../utils';
 
 /**
  * Error handler middleware for handling application errors.
@@ -8,13 +9,13 @@ const { colors: c } = require("../utils");
  * @param {Object} res - The response object.
  * @param {Function} next - The next middleware function.
  */
-const errorHandler = (error, req, res, next) => {
+const errorHandler = (error: Error, req: Request, res: Response, next: NextFunction) => {
   const { message } = error;
   const { method, originalUrl } = req;
 
   // Log the error to the console.
   console.error(
-    `${c.Pink}REQ ERROR: ${c.Reset}${c.Red}[${method}] ${originalUrl}: ${c.Reset}${message}.`
+    `${c.Pink}REQ ERROR: ${c.Reset}${c.Red}[${method}] ${originalUrl}: ${c.Reset}${message}.`,
   );
 
   // Send response back to the client.
@@ -27,4 +28,4 @@ const errorHandler = (error, req, res, next) => {
   next();
 };
 
-module.exports = errorHandler;
+export default errorHandler;

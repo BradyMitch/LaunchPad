@@ -1,9 +1,20 @@
-const bodyParser = require("body-parser");
-const oauthRouter = require("./routes");
+import bodyParser from 'body-parser';
+import { Application } from 'express';
+import oauthRouter from './routes';
 
-exports.middleware = require("./middleware");
+// The token and user properties are not a part of the Request object by default.
+declare global {
+  namespace Express {
+    interface Request {
+      token?: string;
+      user?: object;
+    }
+  }
+}
 
-exports.keycloakInit = (app) => {
+export { default as middleware } from './middleware';
+
+export const keycloakInit = (app: Application) => {
   /**
    * Middleware for parsing request bodies.
    * @module body-parser
@@ -20,8 +31,8 @@ exports.keycloakInit = (app) => {
    * with the specified engine. By setting it to EJS, you can use EJS templates
    * to generate HTML output in your application.
    */
-  app.set("view engine", "ejs");
+  app.set('view engine', 'ejs');
 
   // Routes defined in ./routes.js file.
-  app.use("/oauth", oauthRouter);
+  app.use('/oauth', oauthRouter);
 };

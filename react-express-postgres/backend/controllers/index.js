@@ -1,1 +1,0 @@
-exports.healthController = require("./health");

@@ -1,4 +1,5 @@
-require("dotenv").config();
+import dotenv from 'dotenv';
+dotenv.config();
 
 const {
   ENVIRONMENT,
@@ -15,27 +16,25 @@ const {
 let frontendUrl = FRONTEND_URL;
 let backendUrl = BACKEND_URL;
 
-if (ENVIRONMENT && ENVIRONMENT === "local") {
+if (ENVIRONMENT && ENVIRONMENT === 'local') {
   frontendUrl = `http://localhost:${FRONTEND_PORT}`;
   backendUrl = `http://localhost:${PORT}`;
 }
 
 // Exported configuration values.
-const configuration = {
-  SSO_CLIENT_ID: SSO_CLIENT_ID ?? "",
-  SSO_CLIENT_SECRET: SSO_CLIENT_SECRET ?? "",
+export default {
+  SSO_CLIENT_ID: SSO_CLIENT_ID ?? '',
+  SSO_CLIENT_SECRET: SSO_CLIENT_SECRET ?? '',
   OIDC_AUTHORIZATION_URL: `${SSO_AUTH_SERVER_URL}/auth`,
   OIDC_TOKEN_URL: `${SSO_AUTH_SERVER_URL}/token`,
   OIDC_INTROSPECT_URL: `${SSO_AUTH_SERVER_URL}/token/introspect`,
   OIDC_USER_INFO_URL: `${SSO_AUTH_SERVER_URL}/userinfo`,
   OIDC_LOGOUT_URL: `${SSO_AUTH_SERVER_URL}/logout`,
-  OIDC_GRANT_TYPE: "authorization_code",
-  OIDC_REDIRECT_URL: "/oauth/login/callback",
-  OIDC_RESPONSE_TYPE: "code",
-  OIDC_SCOPE: "email+openid",
-  OIDC_LOGOUT_REDIRECT_URL: "/oauth/logout/callback",
+  OIDC_GRANT_TYPE: 'authorization_code',
+  OIDC_REDIRECT_URL: '/oauth/login/callback',
+  OIDC_RESPONSE_TYPE: 'code',
+  OIDC_SCOPE: 'email+openid',
+  OIDC_LOGOUT_REDIRECT_URL: '/oauth/logout/callback',
   FRONTEND_URL: frontendUrl,
   BACKEND_URL: backendUrl,
 };
-
-module.exports = configuration;

@@ -1,12 +1,14 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const { healthController } = require('../controllers');
+
+import { Request, Response } from 'express';
+import { healthController } from '../controllers';
 
 /**
  * @method GET
  * @route /health
  */
-router.get('/', (req, res) => {
+router.get('/', (req: Request, res: Response) => {
   res.send('Application is healthy!');
 });
 
@@ -16,4 +18,4 @@ router.get('/', (req, res) => {
  */
 router.get('/ready', healthController.isReady);
 
-module.exports = router;
+export default router;
