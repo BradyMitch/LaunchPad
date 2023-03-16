@@ -115,15 +115,17 @@ exports.NPM_REFRESH_BACKEND = [
 
 /**
  * @command rebuild
- * @description Removes frontend and backend containers and images and re-creates them.
+ * @description Removes containers and images and re-creates them.
  */
 exports.REBUILD = [
-  `echo ${c.Yellow}[REBUILD] ${c.Cyan}Rebuilding frontend and backend...${c.Reset}`,
+  `echo ${c.Yellow}[REBUILD] ${c.Cyan}Rebuilding all services...${c.Reset}`,
   "docker rm --force frontend",
   "docker rm --force backend",
+  "docker rm --force database",
   "docker rmi --force react-express-postgres-frontend",
   "docker rmi --force react-express-postgres-backend",
-  "docker compose up -d frontend backend",
+  "docker rmi --force react-express-postgres-database",
+  "docker compose up -d",
 ];
 
 /**

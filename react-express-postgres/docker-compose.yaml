@@ -69,7 +69,7 @@ services:
     networks:
       - project-network
     ports:
-      - 5432:5432
+      - ${DATABASE_PORT:-9005}:5432
     volumes:
       - database-data:/var/lib/postgresql/data # Named volume binded to Postgres' data store directory.
 

@@ -2,7 +2,18 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 // Environment variables set in docker-compose file.
-const { NODE_ENV, ENVIRONMENT, FRONTEND_PORT, FRONTEND_URL, BACKEND_URL, PORT } = process.env;
+const {
+  NODE_ENV,
+  ENVIRONMENT,
+  FRONTEND_PORT,
+  FRONTEND_URL,
+  BACKEND_URL,
+  PORT,
+  PGHOST,
+  PGUSER,
+  PGPASSWORD,
+  PGDATABASE,
+} = process.env;
 
 // Use production urls unless ENVIRONMENT === "local".
 let frontendUrl = FRONTEND_URL;
@@ -64,4 +75,8 @@ export default {
   CORS_OPTIONS,
   RATE_LIMIT_OPTIONS,
   OPENAPI_OPTIONS,
+  PGHOST,
+  PGUSER,
+  PGPASSWORD,
+  PGDATABASE,
 };
