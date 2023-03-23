@@ -18,15 +18,18 @@ interface INotifyProps {
   message: string;
   open: boolean;
   onClose: (event?: SyntheticEvent | Event, reason?: string) => void;
+  testid?: string;
 }
 
 /**
  * A reusable notification component using MUI's Snackbar.
  * @author Brady Mitchell <braden.mitchell@gov.bc.ca | braden.jr.mitch@gmail.com>
- * @param {('success'|'info'|'warning'|'error')} type - (optional, default = 'info') Defines the color.
- * @param {string} message - The message to display.
- * @param {boolean} open - If the notification is open.
- * @param {(event?: SyntheticEvent | Event, reason?: string) => void} onClose - Function to close notication.
+ * @param {INotifyProps} props
+ * @param {('success'|'info'|'warning'|'error')} props.type - (optional, default = 'info') Defines the color.
+ * @param {string} props.message - The message to display.
+ * @param {boolean} props.open - If the notification is open.
+ * @param {(event?: SyntheticEvent | Event, reason?: string) => void} props.onClose - Function to close notication.
+ * @param {string} props.testid - (optional) An identifier for testing frameworks.
  *
  * @example
  * const ParentComponent = () => {
@@ -47,7 +50,7 @@ interface INotifyProps {
  * };
  */
 const Notify = (props: INotifyProps) => {
-  const { type = 'info', message, open, onClose } = props;
+  const { type = 'info', message, open, onClose, testid } = props;
 
   return (
     <Snackbar
@@ -55,6 +58,7 @@ const Notify = (props: INotifyProps) => {
       autoHideDuration={9000}
       TransitionComponent={TransitionRight}
       onClose={onClose}
+      data-testid={testid}
     >
       <Alert
         onClose={onClose}

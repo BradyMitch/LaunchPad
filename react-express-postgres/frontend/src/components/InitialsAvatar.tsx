@@ -5,14 +5,17 @@ import stringToColor from 'utils/stringToColor';
 
 interface IInitialsAvatar {
   size?: 'small' | 'large';
+  testid?: string;
 }
 
 /**
  * Displays a user's initials as an avatar.
- * @param {('small'|'large')} size - (optional, default = 'small') The size of the avatar.
+ * @param {IInitialsAvatar} props
+ * @param {('small'|'large')} props.size - (optional, default = 'small') The size of the avatar.
+ * @param {string} props.testid - (optional) An identifier for testing frameworks.
  */
 const InitialsAvatar = (props: IInitialsAvatar) => {
-  const { size = 'small' } = props;
+  const { size = 'small', testid } = props;
   const { state: authState } = useAuthService();
 
   const user = authState.userInfo;
@@ -28,6 +31,7 @@ const InitialsAvatar = (props: IInitialsAvatar) => {
         width: size === 'small' ? '35px' : '100px',
         fontSize: size === 'small' ? '1.25rem' : '3rem',
       }}
+      data-testid={testid}
     >
       {children}
     </Avatar>
