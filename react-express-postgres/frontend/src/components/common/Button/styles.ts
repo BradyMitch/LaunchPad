@@ -28,4 +28,11 @@ export const btnSX = {
   '&:active': {
     opacity: 0.5,
   },
+  '&:disabled': {
+    backgroundColor: 'var(--gray)',
+    border: '1px solid var(--gray)',
+    color: 'var(--light-gray)',
+    cursor: 'not-allowed',
+    opacity: 0.5,
+  },
 };

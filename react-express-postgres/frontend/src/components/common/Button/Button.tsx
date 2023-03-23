@@ -8,6 +8,7 @@ interface IButtonProps {
   onClick?: Function;
   sx?: SxProps<Theme>;
   testid?: string;
+  disabled?: boolean;
 }
 
 /**
@@ -18,14 +19,16 @@ interface IButtonProps {
  * @param {Function} props.onClick - (optional) The function to be called on button click.
  * @param {SxProps<Theme>} props.sx - (optional) The custom styles to be applied to the button using MUI's `sx` prop.
  * @param {string} props.testid - (optional) An identifier for testing frameworks.
+ * @param {boolean} props.disabled - (optional) If the button should be disabled.
  */
 const Button = (props: IButtonProps) => {
-  const { children, onClick, sx = {}, testid } = props;
+  const { children, onClick, sx = {}, testid, disabled } = props;
   return (
     <MUIButton
       data-testid={testid}
       sx={Object.assign({}, btnSX, sx)}
       onClick={onClick ? () => onClick() : undefined}
+      disabled={disabled}
     >
       {children}
     </MUIButton>
