@@ -9,11 +9,12 @@ const ormconfig: DataSourceOptions = {
   username: PGUSER ?? 'postgres',
   password: PGPASSWORD ?? 'postgres',
   database: PGDATABASE ?? 'project',
-  synchronize: NODE_ENV !== 'production',
+  synchronize: false,
+  migrationsRun: true,
   logging: NODE_ENV !== 'production',
-  entities: ['src/entities/**/*.ts'],
-  migrations: ['src/migrations/**/*.ts'],
-  subscribers: ['src/subscribers/**/*.ts'],
+  entities: [__dirname + 'src/entities/**/*.ts'],
+  migrations: [__dirname + 'src/migrations/**/*.ts'],
+  subscribers: [__dirname + 'src/subscribers/**/*.ts'],
 };
 
 // Create a new DataSource instance with the ormconfig.

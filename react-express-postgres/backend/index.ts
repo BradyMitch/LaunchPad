@@ -18,8 +18,10 @@ const {
 // Connect to the database and initialize it.
 dataSource
   .initialize()
-  .then(() => {
+  .then(async () => {
     console.info(DATABASE_CONNECTION);
+
+    await dataSource.runMigrations();
 
     // Start the Express application (server).
     app.listen(PORT, () => {

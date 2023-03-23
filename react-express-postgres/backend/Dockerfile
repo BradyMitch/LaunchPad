@@ -51,7 +51,7 @@ COPY --from=prod-build /app/package.json ./package.json
 RUN npm i
 
 # Copy build files.
-COPY --from=prod-build /app/dist ./dist
+COPY --from=prod-build /app/dist .
 
 # Node Entrypoint.
-CMD ["node","dist/index.js"]
+CMD ["node","index.js"]
