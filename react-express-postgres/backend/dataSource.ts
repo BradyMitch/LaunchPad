@@ -1,6 +1,7 @@
 import { DataSourceOptions, DataSource } from 'typeorm';
+
 import config from './config';
-const { PGHOST, PGUSER, PGPASSWORD, PGDATABASE, NODE_ENV } = config;
+const { PGHOST, PGUSER, PGPASSWORD, PGDATABASE, ENVIRONMENT, NODE_ENV } = config;
 
 const ormconfig: DataSourceOptions = {
   type: 'postgres',
@@ -11,10 +12,10 @@ const ormconfig: DataSourceOptions = {
   database: PGDATABASE ?? 'project',
   synchronize: false,
   migrationsRun: true,
-  logging: NODE_ENV !== 'production',
-  entities: [__dirname + 'src/entities/**/*.ts'],
-  migrations: [__dirname + 'src/migrations/**/*.ts'],
-  subscribers: [__dirname + 'src/subscribers/**/*.ts'],
+  logging: ENVIRONMENT === 'local' ?? false,
+  entities: [NODE_ENV === 'production' ? 'src/entities/*.js' : 'src/entities/*.ts'],
+  migrations: [NODE_ENV === 'production' ? 'src/migrations/*.js' : 'src/migrations/*.ts'],
+  subscribers: [NODE_ENV === 'production' ? 'src/subscribers/*.js' : 'src/subscribers/*.ts'],
 };
 
 // Create a new DataSource instance with the ormconfig.

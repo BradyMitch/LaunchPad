@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { errorWrapper } from '../utils';
-import config from '../config';
+import config from '../../config';
 const { ENVIRONMENT } = config;
 
 /**

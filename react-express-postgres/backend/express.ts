@@ -4,10 +4,10 @@ import rateLimit from 'express-rate-limit';
 import bodyParser from 'body-parser';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJSDoc from 'swagger-jsdoc';
-import * as routers from './routes';
-import * as middleware from './middleware';
+import * as routers from './src/routes';
+import * as middleware from './src/middleware';
 import config from './config';
-import { keycloakInit } from './keycloak';
+import { keycloakInit } from './src/keycloak';
 
 const { OPENAPI_OPTIONS, CORS_OPTIONS, RATE_LIMIT_OPTIONS, BACKEND_URL } = config;
 

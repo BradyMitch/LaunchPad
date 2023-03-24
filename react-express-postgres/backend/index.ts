@@ -1,11 +1,11 @@
 import 'reflect-metadata';
 import app from './express';
-import dataSource from './ormconfig';
+import dataSource from './dataSource';
 
 import config from './config';
 const { PORT } = config;
 
-import { logMessages } from './utils';
+import { logMessages } from './src/utils';
 const {
   SERVER_START,
   UTC_DATE_TIME,
@@ -20,8 +20,6 @@ dataSource
   .initialize()
   .then(async () => {
     console.info(DATABASE_CONNECTION);
-
-    await dataSource.runMigrations();
 
     // Start the Express application (server).
     app.listen(PORT, () => {

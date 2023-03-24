@@ -6,9 +6,9 @@
   "scripts": {
     "dev": "nodemon -L --exec ts-node index.ts",
     "build": "tsc",
-    "typeorm": "typeorm-ts-node-commonjs -d ormconfig.ts",
+    "typeorm": "typeorm-ts-node-commonjs -d dataSource.ts",
     "create-entity": "typeorm-ts-node-commonjs entity:create",
-    "create-migration": "typeorm-ts-node-commonjs migration:create",
+    "create-migration": "typeorm-ts-node-commonjs migration:create -n",
     "create-subscriber": "typeorm-ts-node-commonjs subscriber:create"
   },
   "dependencies": {

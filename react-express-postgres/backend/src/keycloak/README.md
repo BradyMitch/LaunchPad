@@ -52,8 +52,8 @@ keycloak/
 
 ## Getting Started with the Integration
 
-1. Place `keycloak/` directory in the root level directory.
-2. Add import `const { keycloakInit } = require("./keycloak");` to the top of the file that defines the express app.
+1. Place `keycloak/` directory in the src directory.
+2. Add import `const { keycloakInit } = require("./src/keycloak");` to the top of the file that defines the express app.
 3. Add `keycloakInit(app);` below the definition of the express app.
 4. Add the required packages with `npm i express axios body-parser dotenv`.
 5. Add the required environment variables from the (Environment Variables) section below.

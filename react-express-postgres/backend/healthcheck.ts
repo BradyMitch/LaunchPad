@@ -1,5 +1,5 @@
 import http from 'http';
-import { colors as c } from './utils';
+import { colors as c } from './src/utils';
 import config from './config';
 const { BACKEND_URL, PORT, ENVIRONMENT } = config;
 
