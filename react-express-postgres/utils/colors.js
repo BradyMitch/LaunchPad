@@ -1,3 +1,4 @@
+// ANSI Color Codes
 exports.Reset = "\x1b[0m";
 exports.Bright = "\x1b[1m";
 exports.Underscore = "\x1b[4m";

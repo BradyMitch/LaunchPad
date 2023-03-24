@@ -1,3 +1,4 @@
+// ANSI Color Codes
 export const Reset = '\x1b[0m';
 export const Bright = '\x1b[1m';
 export const Underscore = '\x1b[4m';
