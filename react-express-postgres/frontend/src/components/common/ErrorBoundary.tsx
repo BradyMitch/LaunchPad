@@ -74,7 +74,6 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
                     <Typography
                       sx={{
                         color: 'var(--fc-error-title)',
-                        fontFamily: 'Arial, sans-serif',
                         fontWeight: 'var(--bold)',
                       }}
                     >
@@ -89,7 +88,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
                       {this.props.context}
                     </Typography>
                   </Stack>
-                  <Typography sx={{ fontFamily: 'Arial, sans-serif', color: 'var(--fc-error)' }}>
+                  <Typography sx={{ color: 'var(--fc-error)' }}>
                     {this.state.errorMessage}
                   </Typography>
                 </Stack>

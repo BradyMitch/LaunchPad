@@ -1,13 +1,15 @@
 import http from 'http';
 import { colors as c } from './src/utils';
 import config from './config';
-const { BACKEND_URL, PORT, ENVIRONMENT } = config;
+const { BACKEND_URL } = config;
 
-let backendUrl = BACKEND_URL;
-if (ENVIRONMENT && ENVIRONMENT === 'local') backendUrl = `http://localhost:${PORT}`;
+const healthUrl = `${BACKEND_URL}/health`;
 
-const healthUrl = `${backendUrl}/health`;
-
+/**
+ * Make a request to the health endpoint.
+ * If it returns a 200 status, exit the script with exitCode 0 (terminated with success).
+ * If it returns any other status, exit the script with exitCode 1 (terminated with error).
+ */
 const req = http.request(healthUrl, (res) => {
   process.exitCode = res.statusCode === 200 ? 0 : 1;
 });

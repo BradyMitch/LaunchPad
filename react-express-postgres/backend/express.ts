@@ -53,8 +53,7 @@ app.use('/', (req, res) =>
   ),
 );
 
-// Error handling middleware.
-// Must be placed after routing so it catches all errors.
+// Error handling middleware - Must be placed after routing so it catches all errors.
 app.use(middleware.errorHandler);
 
 export default app;

@@ -20,7 +20,7 @@ const themeConfig: IThemeConfig = {
     },
   },
   typography: {
-    fontFamily: ['BCSans'],
+    fontFamily: ['Arial', 'sans-serif'],
   },
 };
 

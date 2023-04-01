@@ -2,6 +2,7 @@ import express from 'express';
 const router = express.Router();
 
 import { healthController } from '../controllers';
+const { isHealthy, isReady } = healthController;
 
 /**
  * Check if application is healthy.
@@ -9,7 +10,7 @@ import { healthController } from '../controllers';
  * @method GET
  * @route /health
  */
-router.get('/', healthController.isHealthy);
+router.get('/', isHealthy);
 
 /**
  * Check if application has a connection to the database.
@@ -17,6 +18,6 @@ router.get('/', healthController.isHealthy);
  * @method GET
  * @route /health/ready
  */
-router.get('/ready', healthController.isReady);
+router.get('/ready', isReady);
 
 export default router;

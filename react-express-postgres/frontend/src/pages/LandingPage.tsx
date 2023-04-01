@@ -1,18 +1,27 @@
-import './LandingPage.css';
-
 import { Box, Grid, Stack, Typography } from '@mui/material';
 import { Button } from 'components/common';
 import { useAuthService } from 'keycloak';
 import { PageLayout } from 'layouts';
 import React from 'react';
 
+const sx = {
+  landingPage: { marginTop: '6.5vh' },
+  section: {
+    height: '85vh',
+    backgroundColor: 'var(--white)',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+};
+
 const LandingPage = () => {
   const { state: authState, getLoginURL } = useAuthService();
   const user = authState.userInfo;
 
   return (
-    <Stack className="landing-page">
-      <Box className="landing-page__section">
+    <Stack sx={sx.landingPage}>
+      <Box sx={sx.section}>
         <PageLayout>
           <Grid container justifyContent="space-between" alignItems="center" gap={2}>
             <Grid item xs={12} sm={10}>

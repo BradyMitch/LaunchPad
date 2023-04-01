@@ -1,4 +1,5 @@
 module.exports = {
+  ignorePath: '.eslint-prettier-ignore',
   globals: {
     module: 'readonly',
   },
@@ -29,13 +30,13 @@ module.exports = {
     // Override ones from the extended configs.
     'simple-import-sort/imports': 'warn',
     'prettier/prettier': 'warn',
-    '@typescript-eslint/no-non-null-assertion': 'off',
-    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-non-null-assertion': 'off', // Allow use of non-null assertion operator (!).
+    '@typescript-eslint/no-explicit-any': 'warn', // Warn if 'any' type is used.
     '@typescript-eslint/ban-types': [
       'error',
       {
         types: {
-          Function: false,
+          Function: false, // Allow use of the 'Function' type.
         },
         extendDefaults: true,
       },

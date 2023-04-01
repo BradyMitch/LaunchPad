@@ -2,6 +2,7 @@ import express from 'express';
 const router = express.Router();
 
 import { configController } from '../controllers';
+const { getConfig } = configController;
 
 /**
  * Provide configuration variables to the frontend.
@@ -9,6 +10,6 @@ import { configController } from '../controllers';
  * @method GET
  * @route /config
  */
-router.get('/', configController.getConfig);
+router.get('/', getConfig);
 
 export default router;

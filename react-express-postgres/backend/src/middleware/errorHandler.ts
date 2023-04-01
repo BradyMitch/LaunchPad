@@ -1,15 +1,24 @@
 import { Request, Response, NextFunction } from 'express';
 import { colors as c } from '../utils';
 
+interface IErrorHandlerProps {
+  error: Error;
+  req: Request;
+  res: Response;
+  next: NextFunction;
+}
+
 /**
- * Error handler middleware for handling application errors.
+ * Error handler middleware for handling request errors.
  * @author Brady Mitchell <braden.mitchell@gov.bc.ca | braden.jr.mitch@gmail.com>
- * @param {Object} err - The error object.
- * @param {Object} req - The request object.
- * @param {Object} res - The response object.
- * @param {Function} next - The next middleware function.
+ * @param {Object} props
+ * @param {Object} props.error - The error object.
+ * @param {Object} props.req - The request object.
+ * @param {Object} props.res - The response object.
+ * @param {Function} props.next - The next middleware function.
  */
-const errorHandler = (error: Error, req: Request, res: Response, next: NextFunction) => {
+const errorHandler = (props: IErrorHandlerProps) => {
+  const { error, req, res, next } = props;
   const { message } = error;
   const { method, originalUrl } = req;
 

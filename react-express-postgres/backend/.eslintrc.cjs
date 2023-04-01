@@ -1,4 +1,5 @@
 module.exports = {
+  ignorePath: '.eslint-prettier-ignore',
   env: {
     node: true,
     es6: true,

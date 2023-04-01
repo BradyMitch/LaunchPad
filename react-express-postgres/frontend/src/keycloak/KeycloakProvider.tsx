@@ -1,4 +1,4 @@
-import React, { createContext, ReactNode, useReducer } from 'react';
+import React, { createContext, Dispatch, ReactNode, useReducer } from 'react';
 
 import { AuthAction, AuthState, initialState, reducer } from './service/authReducer';
 
@@ -7,7 +7,7 @@ export const AuthContext = createContext<AuthState>(initialState);
 
 // Interface that extends the AuthState interface and adds a dispatch function.
 export interface AuthStateWithDispatch extends AuthState {
-  dispatch: React.Dispatch<AuthAction>;
+  dispatch: Dispatch<AuthAction>;
 }
 
 interface IKeycloakProvider {
