@@ -35,7 +35,7 @@ export const callback = async (req: Request, res: Response) => {
     const redirectUrl = new URL(config.FRONTEND_URL ?? '');
     redirectUrl.searchParams.set('token', tokens.access_token);
     res
-      .cookie('refresh_token', tokens.refresh_token, { httpOnly: true })
+      .cookie('refresh_token', tokens.refresh_token, { httpOnly: true, secure: true })
       .redirect(redirectUrl.toString());
   } catch (error: any) {
     console.error('Keycloak: Error in login callback controller', error);
@@ -67,7 +67,9 @@ export const logout = (req: Request, res: Response) => {
  */
 export const logoutCallback = (req: Request, res: Response) => {
   try {
-    res.cookie('refresh_token', '', { httpOnly: true }).redirect(config.FRONTEND_URL ?? '');
+    res
+      .cookie('refresh_token', '', { httpOnly: true, secure: true })
+      .redirect(config.FRONTEND_URL ?? '');
   } catch (error) {
     console.error('Keycloak: Error in logout callback controller', error);
   }

@@ -30,6 +30,9 @@ app.use(bodyParser.json());
 app.use(cors(CORS_OPTIONS));
 app.use(rateLimit(RATE_LIMIT_OPTIONS));
 
+// Disabled because it exposes information about the used framework to potential attackers.
+app.disable('x-powered-by');
+
 // Routing
 app.use('/health', routers.healthRouter);
 app.use('/config', routers.configRouter);
