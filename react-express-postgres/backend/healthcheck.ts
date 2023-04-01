@@ -1,4 +1,4 @@
-import http from 'http';
+import https from 'https';
 import { colors as c } from './src/utils';
 import config from './config';
 const { BACKEND_URL } = config;
@@ -10,7 +10,7 @@ const healthUrl = `${BACKEND_URL}/health`;
  * If it returns a 200 status, exit the script with exitCode 0 (terminated with success).
  * If it returns any other status, exit the script with exitCode 1 (terminated with error).
  */
-const req = http.request(healthUrl, (res) => {
+const req = https.request(healthUrl, (res) => {
   process.exitCode = res.statusCode === 200 ? 0 : 1;
 });
 
