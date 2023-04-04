@@ -2,13 +2,13 @@
 # 🐳🐳         BASE          🐳🐳 #
 # ================================= #
 
-# Source: https://hub.docker.com/layers/library/node/18.14.2-bullseye-slim/images/sha256-ff7e511abfa57825e17a0655896cf9a644450179f6fa3159ec9813e4c2b87625?context=explore
+# Source: https://hub.docker.com/layers/library/node/18.15-bullseye-slim/images/sha256-e9ea1b9c6ed95b612a2766b7d9399ba35a8cf8068558ca631e08e19c6d6db92d?context=explore
 # Advantages of using bullseye-slim for Node.js in Docker:
 # - Smaller image size & less disk space usage.
 # - Reduced attack surface & improved security.
 # - Faster build times with fewer dependencies.
 # - Better resource utilization & improved performance.
-FROM node:18.14.2-bullseye-slim as base
+FROM node:18.15-bullseye-slim as base
 
 WORKDIR /app
 

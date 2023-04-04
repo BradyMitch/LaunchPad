@@ -60,7 +60,15 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
               justifyContent: 'center',
             }}
           >
-            <Stack spacing={2} sx={{ display: 'flex', alignItems: 'center', maxWidth: '50%' }}>
+            <Stack
+              spacing={2}
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                maxWidth: '50%',
+              }}
+            >
               <Box
                 sx={{
                   bgcolor: 'var(--error-bg)',
