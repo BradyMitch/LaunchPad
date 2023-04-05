@@ -34,6 +34,6 @@ fs.readFile(filePath, "utf8", (error, data) => {
     const description = match[2];
 
     // Print the each command to console.
-    console.log(` ${c.White}${command} ${c.Reset}- ${description}`);
+    console.log(` ${c.Aqua}${command} ${c.Reset}- ${description}`);
   }
 });
