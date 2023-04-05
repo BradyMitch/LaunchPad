@@ -1,9 +1,11 @@
-import { ErrorBoundary } from 'components/common';
+import { ErrorBoundary, Loading } from 'components/common';
 import { KeycloakWrapper } from 'keycloak';
 import { Footer, Header } from 'layouts';
-import { LandingPage } from 'pages';
-import React, { useEffect } from 'react';
+import React, { lazy, Suspense, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
+// Lazy loaded components.
+const LandingPage = lazy(() => import('pages/LandingPage'));
 
 const AppRouter = () => {
   useEffect(() => {
@@ -23,7 +25,14 @@ const AppRouter = () => {
           <Header />
           <ErrorBoundary context="Routes of AppRouter.tsx">
             <Routes>
-              <Route path="/" element={<LandingPage />} />
+              <Route
+                path="/"
+                element={
+                  <Suspense fallback={<Loading pageLayout />}>
+                    <LandingPage />
+                  </Suspense>
+                }
+              />
             </Routes>
           </ErrorBoundary>
           <Footer />
