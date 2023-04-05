@@ -14,6 +14,7 @@
     "rebuild": "node scripts/executeCommand REBUILD",
     "rebuild:f": "node scripts/executeCommand REBUILD_FRONTEND",
     "rebuild:b": "node scripts/executeCommand REBUILD_BACKEND",
+    "dep-versions": "node scripts/executeCommand DEP_VERSIONS",
     "init": "node scripts/executeCommand INIT",
     "help": "node scripts/help"
   }

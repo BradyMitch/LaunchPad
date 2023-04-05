@@ -18,8 +18,6 @@ const replaceKeywords = (str, keywordMap) => {
     const regex = new RegExp(`\\b${keyword}\\b`, "gi");
     result = result.replace(regex, replacement);
   }
-  // Preserve newlines by replacing "\n" with "\r\n"
-  result = result.replace(/\n/g, "\r\n");
   return result;
 };
 
@@ -52,7 +50,7 @@ const replaceKeywords = (str, keywordMap) => {
       const child = spawn(cmd, { shell: true });
 
       child.stdout.on("data", (data) => {
-        const outputLines = data.toString().split("\n");
+        const outputLines = data.toString().trim().split("\n");
         outputLines.forEach((line) => {
           const modifiedLine = replaceKeywords(line, keywordMap);
           console.log(modifiedLine);

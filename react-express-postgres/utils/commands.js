@@ -149,3 +149,14 @@ exports.REBUILD_BACKEND = [
   "docker rmi --force react-express-postgres-backend",
   "docker compose up -d backend",
 ];
+
+/**
+ * @command dep-versions
+ * @description Check for the latest versions of each dependency/package.
+ */
+exports.DEP_VERSIONS = [
+  `echo ${c.Yellow}[DEPENDENCIES] ${c.Cyan}Checking for latest ${c.LBlue}frontend ${c.Cyan}dependency versions...${c.Reset}\n`,
+  "node scripts/checkDepVersions frontend",
+  `echo \n\n${c.Yellow}[DEPENDENCIES] ${c.Cyan}Checking for latest ${c.LBlue}backend ${c.Cyan}dependency versions...${c.Reset}\n`,
+  "node scripts/checkDepVersions backend",
+];

@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 /**
  * The help command is auto generated based on the jsDoc comments in the commands.js file.
  * Use 'npm run help' to see a list of commands.
