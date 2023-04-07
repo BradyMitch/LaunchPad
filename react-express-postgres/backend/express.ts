@@ -2,18 +2,21 @@ import express from 'express';
 import cors from 'cors';
 import rateLimit from 'express-rate-limit';
 import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJSDoc from 'swagger-jsdoc';
 import * as routers from './src/routes';
 import * as middleware from './src/middleware';
 import config from './config';
 import { keycloakInit } from './src/keycloak';
+import { activateUser } from './src/utils';
 
 const { OPENAPI_OPTIONS, CORS_OPTIONS, RATE_LIMIT_OPTIONS, BACKEND_URL } = config;
 
 // Define Express App
 const app = express();
-keycloakInit(app);
+const keycloakOptions = { afterUserLogin: activateUser };
+keycloakInit(app, keycloakOptions);
 
 // Swagger OpenAPI configuration.
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerJSDoc(OPENAPI_OPTIONS)));
@@ -29,6 +32,7 @@ app.use(bodyParser.json());
 
 app.use(cors(CORS_OPTIONS));
 app.use(rateLimit(RATE_LIMIT_OPTIONS));
+app.use(cookieParser());
 
 // Disabled because it exposes information about the used framework to potential attackers.
 app.disable('x-powered-by');

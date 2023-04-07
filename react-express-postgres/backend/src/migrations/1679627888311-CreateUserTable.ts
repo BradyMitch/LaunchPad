@@ -13,7 +13,7 @@ export class CreateUserTable1679627888311 implements MigrationInterface {
             isGenerated: true,
             generationStrategy: 'increment',
           },
-          { name: 'guid', type: 'integer', isNullable: true },
+          { name: 'guid', type: 'text', isNullable: true },
           { name: 'username', type: 'text', isNullable: true },
           { name: 'email', type: 'text', isNullable: true },
           { name: 'firstName', type: 'text', isNullable: true },

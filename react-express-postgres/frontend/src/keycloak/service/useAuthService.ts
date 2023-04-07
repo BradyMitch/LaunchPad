@@ -29,10 +29,28 @@ const useAuthService = () => {
       });
     };
 
+    // Get a new access token using the refresh token.
+    const refreshAccessToken = async () => {
+      const response = await fetch('/api/oauth/token', {
+        method: 'POST',
+        credentials: 'include',
+      });
+
+      if (response.ok) {
+        const { access_token } = await response.json();
+        const decodedToken = decodeJWT(access_token);
+        dispatch({
+          type: SET_TOKEN,
+          payload: { accessToken: access_token, userInfo: decodedToken },
+        });
+      }
+    };
+
     return {
       getLoginURL,
       getLogoutURL,
       setUserInfo,
+      refreshAccessToken,
       state,
     };
   }, [state]);

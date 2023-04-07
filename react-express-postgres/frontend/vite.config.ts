@@ -10,11 +10,6 @@ export default defineConfig({
   build: {
     outDir: 'build',
   },
-  resolve: {
-    alias: {
-      '@node_modules': path.resolve(__dirname, 'node_modules'),
-    },
-  },
   server: {
     host: true,
     port: 9000,
