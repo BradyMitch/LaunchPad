@@ -38,7 +38,7 @@ exports.INIT = [
  * @description Starts docker containers.
  */
 exports.DOCKER_UP = [
-  `echo ${c.Yellow}[UP] ${c.Cyan}Starting containers...${c.Reset}`,
+  `echo ${c.Yellow}[UP] ${c.Cyan}Starting containers...${c.Reset}\n`,
   "docker compose up -d",
 ];
 
@@ -47,7 +47,7 @@ exports.DOCKER_UP = [
  * @description Stops docker containers.
  */
 exports.DOCKER_DOWN = [
-  `echo ${c.Yellow}[DOWN] ${c.Cyan}Stopping containers...${c.Reset}`,
+  `echo ${c.Yellow}[DOWN] ${c.Cyan}Stopping containers...${c.Reset}\n`,
   "docker compose down",
 ];
 
@@ -56,7 +56,7 @@ exports.DOCKER_DOWN = [
  * @description Stops and removes docker containers, images and volumes.
  */
 exports.DOCKER_PRUNE = [
-  `echo ${c.Yellow}[PRUNE] ${c.Cyan}Stopping and removing docker containers, images and volumes...${c.Reset}`,
+  `echo ${c.Yellow}[PRUNE] ${c.Cyan}Stopping and removing docker containers, images and volumes...${c.Reset}\n`,
   "docker compose down --rmi all --volumes",
 ];
 
@@ -155,8 +155,8 @@ exports.REBUILD_BACKEND = [
  * @description Check for the latest versions of each dependency/package.
  */
 exports.DEP_VERSIONS = [
-  `echo ${c.Yellow}[DEPENDENCIES] ${c.Cyan}Checking for latest ${c.LBlue}frontend ${c.Cyan}dependency versions...${c.Reset}\n`,
+  `echo ${c.Yellow}[DEPENDENCIES] ${c.Cyan}Checking for latest ${c.LBlue}frontend ${c.Cyan}dependency versions...${c.Reset}`,
   "node scripts/checkDepVersions frontend",
-  `echo \n\n${c.Yellow}[DEPENDENCIES] ${c.Cyan}Checking for latest ${c.LBlue}backend ${c.Cyan}dependency versions...${c.Reset}\n`,
+  `echo \n\n${c.Yellow}[DEPENDENCIES] ${c.Cyan}Checking for latest ${c.LBlue}backend ${c.Cyan}dependency versions...${c.Reset}`,
   "node scripts/checkDepVersions backend",
 ];

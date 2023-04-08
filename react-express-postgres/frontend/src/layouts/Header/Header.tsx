@@ -33,7 +33,7 @@ const Header = () => {
   const [anchorElUserDropdown, setAnchorElUserDropdown] = useState<HTMLElement | null>(null);
   const [testError, setTestError] = useState(false);
   const { state: authState, getLogoutURL } = useAuthService();
-  const configuration = (window as any).configuration;
+  const configuration = (window as Window).configuration;
 
   const user = authState.userInfo;
 

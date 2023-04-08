@@ -1,5 +1,4 @@
 module.exports = {
-  ignorePath: '.eslint-prettier-ignore',
   globals: {
     module: 'readonly',
   },
@@ -18,7 +17,7 @@ module.exports = {
       // Tells eslint-plugin-react to automatically detect the version of React to use.
       version: 'detect',
     },
-    // Tells eslint how to resolve imports
+    // Tells eslint how to resolve imports.
     'import/resolver': {
       node: {
         paths: ['src'],
@@ -42,4 +41,5 @@ module.exports = {
       },
     ],
   },
+  ignorePatterns: ['node_modules/', 'package-lock.json', 'build/'],
 };

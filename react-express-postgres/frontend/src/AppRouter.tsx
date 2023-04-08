@@ -12,7 +12,7 @@ const AppRouter = () => {
     async function fetchConfig() {
       const configRes = await fetch(`/api/config`);
       const configuration = await configRes.json();
-      (window as any).configuration = configuration;
+      (window as Window).configuration = configuration;
     }
 
     fetchConfig(); // Get configuration variables from API.

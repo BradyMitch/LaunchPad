@@ -2,7 +2,6 @@ import axios from 'axios';
 import qs from 'qs';
 
 import configuration from './configuration';
-import { refreshToken } from './controllers';
 const {
   SSO_CLIENT_ID,
   SSO_CLIENT_SECRET,

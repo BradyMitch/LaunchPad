@@ -1,4 +1,5 @@
 import { Box, CircularProgress } from '@mui/material';
+import React from 'react';
 
 interface ILoadingProps {
   pageLayout?: boolean;

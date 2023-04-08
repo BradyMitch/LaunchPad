@@ -13,8 +13,7 @@ interface IBaseProvider<ContextObjType, StateType, ChildCompsType> {
  *
  * @link [React useReducer Explanation](https://dmitripavlutin.com/react-usereducer/)
  *
- * @author Zach Bourque
- * @author Brady Mitchell <braden.mitchell@gov.bc.ca | braden.jr.mitch@gmail.com>
+ * @author Zach Bourque & Brady Mitchell <braden.mitchell@gov.bc.ca | braden.jr.mitch@gmail.com>
  * @param Context The context of the given piece of state, this is what gets returned from React.useContext
  * @param reducer The reducer for the piece of state.
  * @param initialState The initial values for the piece of state.

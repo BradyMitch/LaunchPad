@@ -50,8 +50,18 @@ const replaceKeywords = (str, keywordMap) => {
       const child = spawn(cmd, { shell: true });
 
       child.stdout.on("data", (data) => {
-        const outputLines = data.toString().trim().split("\n");
+        const outputLines = data.toString().split("\n");
+        let lastLineWasEmpty = false;
         outputLines.forEach((line) => {
+          // Remove extra newlines made by stdout data.
+          if (!lastLineWasEmpty && line.length === 0) {
+            lastLineWasEmpty = true;
+            return;
+          } else if (line.length !== 0) {
+            lastLineWasEmpty = false;
+          }
+
+          // Modify and log the line.
           const modifiedLine = replaceKeywords(line, keywordMap);
           console.log(modifiedLine);
         });

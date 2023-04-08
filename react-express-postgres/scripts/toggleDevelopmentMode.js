@@ -26,7 +26,7 @@ if (fs.existsSync(OVERRIDE_FILE)) {
 } else {
   // File does not exist.
   console.log(
-    `\n${c.Pink}Docker compose override file does not exist.${c.Reset}
+    `\n\n${c.Pink}Docker compose override file does not exist.${c.Reset}
 ${c.Pink}Use ${c.White}npm run init ${c.Pink}to create the file.${c.Reset}`
   );
   return;
@@ -36,14 +36,14 @@ ${c.Pink}Use ${c.White}npm run init ${c.Pink}to create the file.${c.Reset}`
 if (toggleToProduction) {
   // Toggling to Production.
   console.log(
-    `\n${c.Cyan}Toggled to local ${c.White}production ${c.Cyan}mode.${c.Reset}
+    `\n\n${c.Cyan}Toggled to local ${c.White}production ${c.Cyan}mode.${c.Reset}
 ${c.Grey}This means the local servers will mimic a production environment${c.Reset}
 ${c.Grey}by setting the target to 'prod' in frontend and backend Dockerfiles.${c.Reset}`
   );
 } else {
   // Toggling to Development.
   console.log(
-    `\n${c.Cyan}Toggled to local ${c.White}development ${c.Cyan}mode.${c.Reset}
+    `\n\n${c.Cyan}Toggled to local ${c.White}development ${c.Cyan}mode.${c.Reset}
 ${c.Grey}This means the local servers will 'refresh'${c.Reset}
 ${c.Grey}to update with changes to the local files.${c.Reset}`
   );
