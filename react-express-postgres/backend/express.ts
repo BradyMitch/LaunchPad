@@ -1,7 +1,6 @@
 import express from 'express';
 import cors from 'cors';
 import rateLimit from 'express-rate-limit';
-import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJSDoc from 'swagger-jsdoc';
@@ -27,8 +26,8 @@ app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerJSDoc(OPENAPI_OPTIONS))
  * @property {Function} urlencodedParser - Middleware for parsing URL-encoded data from the request body.
  * @property {Function} jsonParser - Middleware for parsing JSON data from the request body.
  */
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
 app.use(cors(CORS_OPTIONS));
 app.use(rateLimit(RATE_LIMIT_OPTIONS));
