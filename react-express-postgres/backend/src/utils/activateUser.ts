@@ -1,8 +1,8 @@
-import { IKeycloakUser } from '../keycloak';
+import { KeycloakUser } from '../keycloak';
 import { UserService } from '../services';
 
 // Called after login to create or update a user.
-const activateUser = async (userInfo: IKeycloakUser) => {
+const activateUser = async (userInfo: KeycloakUser) => {
   // Determine the provider.
   const provider = userInfo?.identity_provider;
   if (provider !== 'idir') return;

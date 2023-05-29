@@ -1,11 +1,10 @@
-import express from 'express';
+const express = require('express');
 const router = express.Router();
 
-import { IKeycloakInitOptions } from '.';
-import * as oauthController from './controllers';
+const oauthController = require('./controllers.js');
 const { login, loginCallback, logout, logoutCallback, refreshToken } = oauthController;
 
-const oauthRouter = (options?: IKeycloakInitOptions | undefined) => {
+const oauthRouter = (options) => {
   /**
    * Prompts the user to login.
    * @author Zach Bourque & Brady Mitchell
@@ -49,4 +48,4 @@ const oauthRouter = (options?: IKeycloakInitOptions | undefined) => {
   return router;
 };
 
-export default oauthRouter;
+module.exports = oauthRouter;

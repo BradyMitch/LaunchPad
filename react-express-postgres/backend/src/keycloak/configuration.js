@@ -1,4 +1,4 @@
-import dotenv from 'dotenv';
+const dotenv = require('dotenv');
 dotenv.config();
 
 const {
@@ -22,7 +22,7 @@ if (ENVIRONMENT && ENVIRONMENT === 'local') {
 }
 
 // Exported configuration values.
-export default {
+module.exports = {
   SSO_CLIENT_ID: SSO_CLIENT_ID ?? '',
   SSO_CLIENT_SECRET: SSO_CLIENT_SECRET ?? '',
   OIDC_AUTHORIZATION_URL: `${SSO_AUTH_SERVER_URL}/auth`,

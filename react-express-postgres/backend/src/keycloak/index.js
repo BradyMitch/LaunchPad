@@ -1,38 +1,10 @@
-import cookieParser from 'cookie-parser';
-import express, { Application } from 'express';
-import oauthRouter from './routes';
-import cors from 'cors';
+const cookieParser = require('cookie-parser');
+const cors = require('cors');
+const express = require('express');
+const oauthRouter = require('./routes.js');
+const middleware = require('./middleware.js');
 
-// The token and user properties are not a part of the Request object by default.
-declare global {
-  namespace Express {
-    interface Request {
-      token?: string;
-      user?: object;
-    }
-  }
-}
-
-export interface IKeycloakUser {
-  idir_user_guid?: string;
-  identity_provider?: string;
-  idir_username?: string;
-  name?: string;
-  preferred_username?: string;
-  email?: string;
-  given_name?: string;
-  display_name?: string;
-  family_name?: string;
-  client_roles?: string[];
-}
-
-export interface IKeycloakInitOptions {
-  afterUserLogin?: (userInfo: IKeycloakUser) => void;
-}
-
-export { default as middleware } from './middleware';
-
-export const keycloakInit = (app: Application, options?: IKeycloakInitOptions) => {
+const keycloakInit = (app, options) => {
   /**
    * Middleware for parsing request bodies.
    * @module body-parser
@@ -67,4 +39,9 @@ export const keycloakInit = (app: Application, options?: IKeycloakInitOptions) =
 
   // Routes defined in ./routes.js file.
   app.use('/oauth', oauthRouter(options));
+};
+
+module.exports = {
+  middleware,
+  keycloakInit,
 };

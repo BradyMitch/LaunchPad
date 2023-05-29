@@ -1,6 +1,6 @@
 import { User } from '../entities';
 import { UserRepository } from '../repositories';
-import { IKeycloakUser } from '../keycloak';
+import { KeycloakUser } from '../keycloak';
 
 /**
  * @author Brady Mitchell <braden.mitchell@gov.bc.ca | braden.jr.mitch@gmail.com>
@@ -10,7 +10,7 @@ export const UserService = () => {
   const userRepository = UserRepository();
 
   // Create user if they don't exist, or update an existing user.
-  const activateKeycloakIdirUser = async (userData: IKeycloakUser): Promise<User | undefined> => {
+  const activateKeycloakIdirUser = async (userData: KeycloakUser): Promise<User | undefined> => {
     // Find user if exists.
     if (!userData.idir_user_guid) return undefined;
     const idirUser = await userRepository.getUserByGuid(userData.idir_user_guid);

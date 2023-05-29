@@ -2,11 +2,11 @@ import React, { ReactNode, useEffect } from 'react';
 
 import useAuthService from './service/useAuthService';
 
-interface IKeycloakWrapper {
+interface KeycloakWrapper {
   children: ReactNode;
 }
 
-const KeycloakWrapper = (props: IKeycloakWrapper) => {
+const KeycloakWrapper = (props: KeycloakWrapper) => {
   const { children } = props;
   const { setUserInfo, refreshAccessToken } = useAuthService();
 

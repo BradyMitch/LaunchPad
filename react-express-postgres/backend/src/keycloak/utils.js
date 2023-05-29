@@ -1,7 +1,7 @@
-import axios from 'axios';
-import qs from 'qs';
+const axios = require('axios');
+const qs = require('qs');
 
-import configuration from './configuration';
+const configuration = require('./configuration.js');
 const {
   SSO_CLIENT_ID,
   SSO_CLIENT_SECRET,
@@ -18,10 +18,10 @@ const {
 } = configuration;
 
 // Encodes a string to a Base64-encoded string.
-const encodeToBase64 = (string: string) => Buffer.from(string).toString('base64');
+const encodeToBase64 = (string) => Buffer.from(string).toString('base64');
 
 // Decodes a Base64-encoded string to a JSON object.
-const decodeBase64ToJSON = (base64String: string) => {
+const decodeBase64ToJSON = (base64String) => {
   try {
     return JSON.parse(Buffer.from(base64String, 'base64').toString('ascii'));
   } catch {
@@ -30,7 +30,7 @@ const decodeBase64ToJSON = (base64String: string) => {
 };
 
 // Parses a JWT and returns an object with decoded header and payload.
-const parseJWT = (token: string) => {
+const parseJWT = (token) => {
   if (!token) return null;
   const [header, payload] = token.split('.');
 
@@ -42,7 +42,7 @@ const parseJWT = (token: string) => {
 
 // Gets decoded tokens and user information from the OIDC server using a code.
 // See https://datatracker.ietf.org/doc/html/rfc6749#section-4.1.3
-export const getTokens = async (code: unknown) => {
+const getTokens = async (code) => {
   const params = {
     grant_type: OIDC_GRANT_TYPE,
     client_id: SSO_CLIENT_ID,
@@ -64,7 +64,7 @@ export const getTokens = async (code: unknown) => {
 };
 
 // Use refresh token to get a new access token.
-export const getNewAccessToken = async (refresh_token: string) => {
+const getNewAccessToken = async (refresh_token) => {
   const params = {
     grant_type: 'refresh_token',
     client_id: SSO_CLIENT_ID,
@@ -80,7 +80,7 @@ export const getNewAccessToken = async (refresh_token: string) => {
 
 // Gets the authorization URL to redirect the user to the OIDC server for authentication.
 // See https://datatracker.ietf.org/doc/html/rfc6749#section-4.1.1
-export const getAuthorizationUrl = (): string => {
+const getAuthorizationUrl = () => {
   const params = {
     client_id: SSO_CLIENT_ID,
     response_type: OIDC_RESPONSE_TYPE,
@@ -92,7 +92,7 @@ export const getAuthorizationUrl = (): string => {
 };
 
 // Gets the logout URL to redirect the user to the OIDC server for logout.
-export const getLogoutUrl = (): string => {
+const getLogoutUrl = () => {
   const params = {
     client_id: SSO_CLIENT_ID,
     redirect_uri: BACKEND_URL + OIDC_LOGOUT_REDIRECT_URL,
@@ -102,7 +102,7 @@ export const getLogoutUrl = (): string => {
 };
 
 // Checks if a JWT is valid.
-export const isJWTValid = async (jwt: string): Promise<boolean> => {
+const isJWTValid = async (jwt) => {
   const params = {
     client_id: SSO_CLIENT_ID,
     client_secret: SSO_CLIENT_SECRET,
@@ -121,8 +121,17 @@ export const isJWTValid = async (jwt: string): Promise<boolean> => {
 };
 
 // Gets user information from parsing an access token JWT.
-export const getUserInfo = (access_token: string) => {
+const getUserInfo = (access_token) => {
   const data = parseJWT(access_token);
   if (!data) return null;
   return data.payload;
+};
+
+module.exports = {
+  getTokens,
+  getNewAccessToken,
+  getAuthorizationUrl,
+  getLogoutUrl,
+  isJWTValid,
+  getUserInfo,
 };

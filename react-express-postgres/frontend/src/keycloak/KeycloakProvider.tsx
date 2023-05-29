@@ -10,7 +10,7 @@ export interface AuthStateWithDispatch extends AuthState {
   dispatch: Dispatch<AuthAction>;
 }
 
-interface IKeycloakProvider {
+interface KeycloakProvider {
   children: ReactNode;
 }
 
@@ -18,7 +18,7 @@ interface IKeycloakProvider {
  * Provides a keycloak authentication context to its children.
  * @param {ReactNode} children - The children components to be wrapped with the authentication context.
  */
-const KeycloakProvider = (props: IKeycloakProvider) => {
+const KeycloakProvider = (props: KeycloakProvider) => {
   const { children } = props;
   // Initialize the authentication state and dispatch function using the reducer.
   const [state, dispatch] = useReducer(reducer, initialState);
