@@ -55,7 +55,7 @@ keycloak/
 1. Place `keycloak/` directory in the src directory.
 2. Add import `const { keycloakInit } = require("./src/keycloak");` to the top of the file that defines the express app.
 3. Add `keycloakInit(app);` below the definition of the express app.
-4. Add the required packages with `npm i express axios cors dotenv cookie-parser` and `npm i -D @types/express @types/cookie-parser`.
+4. Add the required packages with `npm i express cors dotenv cookie-parser` and `npm i -D @types/express @types/cookie-parser`.
 5. Add the required environment variables from the (Environment Variables) section below.
 
 <br />

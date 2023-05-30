@@ -1,4 +1,3 @@
-const axios = require('axios');
 const qs = require('qs');
 
 const configuration = require('./configuration.js');
@@ -53,7 +52,13 @@ const getTokens = async (code) => {
     ? { Authorization: `Basic ${encodeToBase64(`${SSO_CLIENT_ID}:${SSO_CLIENT_SECRET}`)}` }
     : {};
 
-  const { data } = await axios.post(OIDC_TOKEN_URL, qs.stringify(params), { headers });
+  const response = await fetch(OIDC_TOKEN_URL, {
+    method: 'POST',
+    headers: { ...headers, 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: qs.stringify(params),
+  });
+
+  const data = await response.json();
 
   const { id_token, access_token, refresh_token } = data;
   const id_token_decoded = parseJWT(id_token);
@@ -72,9 +77,13 @@ const getNewAccessToken = async (refresh_token) => {
     refresh_token,
   };
 
-  const {
-    data: { access_token },
-  } = await axios.post(OIDC_TOKEN_URL, qs.stringify(params));
+  const response = await fetch(OIDC_TOKEN_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: qs.stringify(params),
+  });
+
+  const { access_token } = await response.json();
   return access_token;
 };
 
@@ -113,9 +122,13 @@ const isJWTValid = async (jwt) => {
     'Content-Type': 'application/x-www-form-urlencoded',
   };
 
-  const {
-    data: { active },
-  } = await axios.post(OIDC_INTROSPECT_URL, qs.stringify(params), { headers });
+  const response = await fetch(OIDC_INTROSPECT_URL, {
+    method: 'POST',
+    headers,
+    body: qs.stringify(params),
+  });
+
+  const { active } = await response.json();
 
   return active;
 };
