@@ -1,18 +1,8 @@
-import AuthActionType from './authActions';
+import { AuthActionType } from './index.d.ts';
 const { LOGIN, LOGOUT, SET_TOKEN } = AuthActionType;
 
-export interface AuthState {
-  accessToken: string;
-  userInfo?: Record<string, any>;
-}
-
-export interface AuthAction {
-  type: AuthActionType;
-  payload?: { accessToken?: string; userInfo?: Record<string, any> };
-}
-
 // Initial authentication state.
-export const initialState: AuthState = {
+export const initialState = {
   accessToken: '',
   userInfo: undefined,
 };
@@ -23,7 +13,7 @@ export const initialState: AuthState = {
  * @param {AuthAction} action - The authentication action to be handled.
  * @returns {AuthState} - The updated authentication state.
  */
-export const reducer = (state: AuthState, action: AuthAction): AuthState => {
+export const reducer = (state, action) => {
   switch (action.type) {
     case LOGIN:
       return { ...state, ...action.payload };

@@ -4,7 +4,7 @@
  * @param {string} jwt - The JWT string to be decoded.
  * @returns {Object} - The decoded payload object.
  */
-const decodeJWT = (jwt: string) => {
+const decodeJWT = (jwt) => {
   const base64Url = jwt.split('.')[1];
   const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
   const jsonPayload = decodeURIComponent(

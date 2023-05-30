@@ -2,7 +2,7 @@ import { useContext, useMemo } from 'react';
 
 import { AuthContext } from '../KeycloakProvider';
 import decodeJWT from '../utils/decodeJWT';
-import AuthActionType from './authActions';
+import { AuthActionType } from './index.d.ts';
 
 const { SET_TOKEN } = AuthActionType;
 
@@ -13,7 +13,7 @@ const { SET_TOKEN } = AuthActionType;
  */
 const useAuthService = () => {
   // Get the authentication state and dispatch function from the authentication context.
-  const { state, dispatch } = useContext<any>(AuthContext);
+  const { state, dispatch } = useContext(AuthContext);
 
   // Use useMemo to memoize the returned object and prevent unnecessary re-renders.
   return useMemo(() => {
@@ -21,7 +21,7 @@ const useAuthService = () => {
     const getLogoutURL = () => '/api/oauth/logout';
 
     // Sets the user information in the authentication state using a JWT token.
-    const setUserInfo = (token: string) => {
+    const setUserInfo = (token) => {
       const decodedToken = decodeJWT(token);
       dispatch({
         type: SET_TOKEN,
