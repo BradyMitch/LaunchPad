@@ -1,4 +1,4 @@
-export { default as KeycloakProvider } from './KeycloakProvider';
-export { default as KeycloakWrapper } from './KeycloakWrapper';
-export { default as useAuthService } from './service/useAuthService';
+export { KeycloakProvider } from './KeycloakProvider';
+export { KeycloakWrapper } from './KeycloakWrapper';
+export { useAuthService } from './service/useAuthService';
 export { AuthContext } from './KeycloakProvider';

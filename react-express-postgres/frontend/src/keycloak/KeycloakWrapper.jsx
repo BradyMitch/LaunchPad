@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
+
 import useAuthService from './service/useAuthService';
 
-const KeycloakWrapper = (props) => {
+export const KeycloakWrapper = (props) => {
   const { children } = props;
   const { setUserInfo, refreshAccessToken } = useAuthService();
 

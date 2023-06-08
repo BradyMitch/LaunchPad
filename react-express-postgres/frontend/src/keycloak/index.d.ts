@@ -1,12 +1,6 @@
-import { AuthAction, AuthState } from './service';
 import { Context, Dispatch, ReactNode } from 'react';
 
-export { AuthAction, AuthState, AuthActionType } from './service';
-
-// Interface that extends the AuthState interface and adds a dispatch function.
-export interface AuthStateWithDispatch extends AuthState {
-  dispatch: Dispatch<AuthAction>;
-}
+import { AuthAction, AuthState } from './service';
 
 // PROPS
 interface KeycloakProviderProps {
@@ -16,9 +10,17 @@ interface KeycloakWrapperProps {
   children: ReactNode;
 }
 
+// Interface that extends the AuthState interface and adds a dispatch function.
+export interface AuthStateWithDispatch extends AuthState {
+  dispatch: Dispatch<AuthAction>;
+}
+
 // CONSTANTS
-declare const AuthContext: Context<AuthState>;
+export declare const AuthContext: Context<AuthState>;
 
 // FUNCTIONS
-declare function KeycloakProvider(props: KeycloakProviderProps): JSX.Element;
-declare function KeycloakWrapper(props: KeycloakWrapperProps): JSX.Element;
+export declare function KeycloakProvider(props: KeycloakProviderProps): JSX.Element;
+export declare function KeycloakWrapper(props: KeycloakWrapperProps): JSX.Element;
+
+// Exported types from ./service
+export { AuthAction, AuthState, AuthActionType, useAuthService } from './service';

@@ -5,11 +5,19 @@ export enum AuthActionType {
   SET_TOKEN = 'SET_TOKEN',
 }
 
+declare interface AuthService {
+  state: AuthState;
+  getLoginURL: () => string;
+  getLogoutURL: () => string;
+  setUserInfo: (token: string) => void;
+  hasRole: (role: string) => boolean;
+  refreshAccessToken: () => Promise<void>;
+}
+
 export declare interface AuthState {
   accessToken: string;
   userInfo?: Record<string, any>;
 }
-
 export declare interface AuthAction {
   type: AuthActionType;
   payload?: { accessToken?: string; userInfo?: Record<string, any> };
@@ -19,5 +27,5 @@ export declare interface AuthAction {
 declare const initialState: AuthState;
 
 // FUNCTIONS
+export declare function useAuthService(): AuthService;
 declare function reducer(state: AuthState, action: AuthAction): AuthState;
-declare function setUserInfo(token: string): void;

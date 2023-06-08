@@ -2,7 +2,11 @@ module.exports = {
   globals: {
     module: 'readonly',
   },
-  envs: ['node'],
+  env: {
+    node: true,
+    browser: true,
+  },
+  parser: '@typescript-eslint/parser',
   extends: [
     // By extending from a plugin config, we can get recommended rules without having to add them manually.
     'eslint:recommended',
@@ -30,6 +34,7 @@ module.exports = {
     // Override ones from the extended configs.
     'simple-import-sort/imports': 'warn',
     'prettier/prettier': 'warn',
+    'react/prop-types': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off', // Allow use of non-null assertion operator (!).
     '@typescript-eslint/no-explicit-any': 'warn', // Warn if 'any' type is used.
     '@typescript-eslint/ban-types': [
