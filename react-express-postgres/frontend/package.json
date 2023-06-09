@@ -8,6 +8,7 @@
     "test": "vitest run"
   },
   "dependencies": {
+    "@bcgov/keycloak-react": "file:./src/experimental/bcgov-keycloak-react-1.0.0-alpha.1.tgz",
     "@emotion/react": "11.10.6",
     "@emotion/styled": "11.10.6",
     "@mui/icons-material": "5.11.16",

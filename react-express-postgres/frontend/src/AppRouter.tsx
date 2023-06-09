@@ -1,5 +1,5 @@
+import { KeycloakWrapper } from '@bcgov/keycloak-react';
 import { ErrorBoundary, Loading } from 'components/common';
-import { KeycloakWrapper } from 'keycloak';
 import { Footer, Header } from 'layouts';
 import React, { lazy, Suspense, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';

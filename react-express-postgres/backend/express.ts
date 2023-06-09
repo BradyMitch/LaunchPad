@@ -7,7 +7,7 @@ import swaggerJSDoc from 'swagger-jsdoc';
 import * as routers from './src/routes';
 import * as middleware from './src/middleware';
 import config from './config';
-import { keycloakInit } from './src/keycloak';
+import { keycloakInit } from '@bcgov/keycloak-express';
 import { activateUser } from './src/utils';
 
 const { OPENAPI_OPTIONS, CORS_OPTIONS, RATE_LIMIT_OPTIONS, BACKEND_URL } = config;

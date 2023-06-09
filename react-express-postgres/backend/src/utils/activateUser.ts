@@ -1,4 +1,4 @@
-import { KeycloakUser } from '../keycloak';
+import { KeycloakUser } from '@bcgov/keycloak-express';
 import { UserService } from '../services';
 
 // Called after login to create or update a user.

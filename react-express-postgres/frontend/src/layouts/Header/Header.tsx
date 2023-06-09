@@ -1,3 +1,4 @@
+import { useAuthService } from '@bcgov/keycloak-react';
 import {
   DataObject as DataObjectIcon,
   ErrorOutline as ErrorIcon,
@@ -21,7 +22,6 @@ import {
 } from '@mui/material';
 import ProjectLogo from 'assets/ProjectLogo.png';
 import { InitialsAvatar } from 'components';
-import { useAuthService } from 'keycloak';
 import React, { MouseEvent, useState } from 'react';
 import { To, useNavigate } from 'react-router';
 

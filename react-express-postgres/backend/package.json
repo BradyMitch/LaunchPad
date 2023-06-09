@@ -12,6 +12,7 @@
     "create-subscriber": "typeorm-ts-node-commonjs subscriber:create"
   },
   "dependencies": {
+    "@bcgov/keycloak-express": "file:./src/experimental/bcgov-keycloak-express-1.0.0-alpha.1.tgz",
     "cookie-parser": "1.4.6",
     "cors": "2.8.5",
     "dotenv": "16.0.3",

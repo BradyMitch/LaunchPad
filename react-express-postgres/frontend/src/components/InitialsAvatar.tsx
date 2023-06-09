@@ -1,5 +1,5 @@
+import { useAuthService } from '@bcgov/keycloak-react';
 import { Avatar } from '@mui/material';
-import { useAuthService } from 'keycloak';
 import React from 'react';
 import stringToColor from 'utils/stringToColor';
 

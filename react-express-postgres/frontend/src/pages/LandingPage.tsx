@@ -1,6 +1,6 @@
+import { useAuthService } from '@bcgov/keycloak-react';
 import { Box, Grid, Stack, Typography } from '@mui/material';
 import { Button } from 'components/common';
-import { useAuthService } from 'keycloak';
 import { PageLayout } from 'layouts';
 import React from 'react';
 

@@ -1,6 +1,6 @@
 import { User } from '../entities';
 import { UserRepository } from '../repositories';
-import { KeycloakUser } from '../keycloak';
+import { KeycloakUser } from '@bcgov/keycloak-express';
 
 /**
  * @author Brady Mitchell <braden.mitchell@gov.bc.ca | braden.jr.mitch@gmail.com>
