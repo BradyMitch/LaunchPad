@@ -9,24 +9,24 @@ export const UserRepository = () => {
   const repository = dataSource.getRepository(User);
 
   // Retrieve a user by their id.
-  const getUserById = async (id: number): Promise<User | undefined | null> => {
+  const getById = async (id: number): Promise<User | undefined | null> => {
     return await repository.findOne({ where: { id } });
   };
 
   // Retrieve a user by their guid.
-  const getUserByGuid = async (guid: string): Promise<User | undefined | null> => {
+  const getByGuid = async (guid: string): Promise<User | undefined | null> => {
     return await repository.findOne({ where: { guid } });
   };
 
   // Creates a new user.
-  const createUser = async (userData: Partial<User>): Promise<User> => {
+  const create = async (userData: Partial<User>): Promise<User> => {
     const user = repository.create(userData);
     return await repository.save(user);
   };
 
   // Updates an existing user.
-  const updateUser = async (guid: string, userData: Partial<User>): Promise<User | undefined> => {
-    const user = await getUserByGuid(guid);
+  const update = async (guid: string, userData: Partial<User>): Promise<User | undefined> => {
+    const user = await getByGuid(guid);
     if (!user) return undefined;
     Object.assign(user, userData);
     return await repository.save(user);
@@ -34,9 +34,9 @@ export const UserRepository = () => {
 
   // Return an object with the defined methods.
   return {
-    createUser,
-    updateUser,
-    getUserById,
-    getUserByGuid,
+    create,
+    update,
+    getById,
+    getByGuid,
   };
 };

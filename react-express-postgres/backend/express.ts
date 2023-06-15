@@ -5,7 +5,6 @@ import cookieParser from 'cookie-parser';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJSDoc from 'swagger-jsdoc';
 import * as routers from './src/routes';
-import * as middleware from './src/middleware';
 import config from './config';
 import { keycloakInit } from '@bcgov/keycloak-express';
 import { activateUser } from './src/utils';
@@ -14,6 +13,8 @@ const { OPENAPI_OPTIONS, CORS_OPTIONS, RATE_LIMIT_OPTIONS, BACKEND_URL } = confi
 
 // Define Express App
 const app = express();
+
+// Initialize Keycloak.
 const keycloakOptions = { afterUserLogin: activateUser };
 keycloakInit(app, keycloakOptions);
 
@@ -58,8 +59,5 @@ app.use('/', (req, res) =>
     </html>`,
   ),
 );
-
-// Error handling middleware - Must be placed after routing so it catches all errors.
-app.use(middleware.errorHandler);
 
 export default app;

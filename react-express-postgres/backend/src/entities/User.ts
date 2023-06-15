@@ -5,30 +5,30 @@ export class User {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column({ type: 'text', nullable: true })
+  @Column()
   guid: string | undefined | null;
 
-  @Column({ type: 'text', nullable: true })
+  @Column()
   username: string | undefined | null;
 
-  @Column({ type: 'text', nullable: true })
+  @Column()
   email: string | undefined | null;
 
-  @Column({ type: 'text', nullable: true })
+  @Column()
   firstName: string | undefined | null;
 
-  @Column({ type: 'text', nullable: true })
+  @Column()
   lastName: string | undefined | null;
 
-  @Column({ type: 'text', array: true, nullable: true })
+  @Column()
   roles: string[] | undefined | null;
 
-  @Column({ type: 'timestamp', nullable: true, default: () => 'NOW()' })
+  @Column()
   createdOn: Date | undefined | null;
 
-  @Column({ type: 'timestamp', nullable: true })
+  @Column()
   lastUpdated: Date | undefined | null;
 
-  @Column({ type: 'timestamp', nullable: true })
+  @Column()
   lastLogin: Date | undefined | null;
 }
