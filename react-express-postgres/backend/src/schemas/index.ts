@@ -1,0 +1,1 @@
+export { KeycloakIdirUser } from './KeycloakIdirUser';

@@ -13,9 +13,9 @@ const ormconfig: DataSourceOptions = {
   synchronize: false,
   migrationsRun: true,
   logging: ENVIRONMENT === 'local' ?? false,
-  entities: [NODE_ENV === 'production' ? 'src/entities/*.js' : 'src/entities/*.ts'],
-  migrations: [NODE_ENV === 'production' ? 'src/migrations/*.js' : 'src/migrations/*.ts'],
-  subscribers: [NODE_ENV === 'production' ? 'src/subscribers/*.js' : 'src/subscribers/*.ts'],
+  entities: [`src/database/entities/*.${NODE_ENV === 'production' ? 'js' : 'ts'}`],
+  migrations: [`src/database/migrations/*.${NODE_ENV === 'production' ? 'js' : 'ts'}`],
+  subscribers: [`src/database/subscribers/*.${NODE_ENV === 'production' ? 'js' : 'ts'}`],
 };
 
 // Create a new DataSource instance with the ormconfig.

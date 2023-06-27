@@ -1,5 +1,5 @@
 import { User } from '../entities';
-import dataSource from '../../dataSource';
+import dataSource from '../../../dataSource';
 
 /**
  * @author Brady Mitchell <braden.mitchell@gov.bc.ca | braden.jr.mitch@gmail.com>

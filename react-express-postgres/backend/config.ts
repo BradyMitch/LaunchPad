@@ -5,6 +5,7 @@ dotenv.config();
 const {
   NODE_ENV,
   ENVIRONMENT,
+  DEBUG,
   FRONTEND_PORT,
   FRONTEND_URL,
   BACKEND_URL,
@@ -61,7 +62,7 @@ const OPENAPI_OPTIONS = {
     },
     servers: [{ url: backendUrl }],
   },
-  apis: ['./src/controllers/*.yaml'],
+  apis: ['./src/apidocs/*.yaml'],
 };
 
 // Exported configuration values.
@@ -69,6 +70,7 @@ export default {
   PORT: PORT ?? 9009,
   NODE_VERSION: process.version,
   NODE_ENV,
+  DEBUG: DEBUG === 'true',
   ENVIRONMENT,
   FRONTEND_URL: frontendUrl,
   BACKEND_URL: backendUrl,

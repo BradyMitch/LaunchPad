@@ -1,6 +1,6 @@
-import BaseProvider from 'providers/BaseProvider';
 import React, { createContext, ReactNode } from 'react';
-import { initialState, reducer } from 'services/users/userReducer';
+import BaseProvider from 'state/providers/BaseProvider';
+import { initialState, reducer } from 'state/services/users/userReducer';
 
 export const UserContext = createContext(initialState);
 

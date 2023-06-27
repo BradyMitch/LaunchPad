@@ -9,13 +9,11 @@ const LandingPage = lazy(() => import('pages/LandingPage'));
 
 const AppRouter = () => {
   useEffect(() => {
-    async function fetchConfig() {
+    (async () => {
       const configRes = await fetch(`/api/config`);
       const configuration = await configRes.json();
       (window as Window).configuration = configuration;
-    }
-
-    fetchConfig(); // Get configuration variables from API.
+    })();
   }, []);
 
   return (

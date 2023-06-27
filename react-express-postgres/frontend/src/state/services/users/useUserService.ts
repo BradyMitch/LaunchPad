@@ -1,5 +1,5 @@
-import { UserContext } from 'providers/UserProvider';
 import { useContext, useMemo } from 'react';
+import { UserContext } from 'state/providers/UserProvider';
 
 import UserActionType from './userActions';
 
@@ -11,6 +11,7 @@ const { GET_USERS } = UserActionType;
  * and the current users state.
  */
 const useUserService = () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { state, dispatch } = useContext<any>(UserContext);
 
   return useMemo(() => {

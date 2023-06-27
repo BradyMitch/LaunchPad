@@ -1,6 +1,8 @@
 import { Request, Response } from 'express';
 import { errorWrapper } from '../utils';
 import dataSource from '../../dataSource';
+import config from '../../config';
+const { DEBUG } = config;
 
 /**
  * Check if application is healthy.
@@ -9,6 +11,7 @@ import dataSource from '../../dataSource';
  * @route /health
  */
 export const isHealthy = errorWrapper(async (req: Request, res: Response) => {
+  if (DEBUG) console.log('isHealthy controller in controllers/health called.');
   res.send('Application is healthy!');
 });
 
@@ -19,6 +22,7 @@ export const isHealthy = errorWrapper(async (req: Request, res: Response) => {
  * @route /health/ready
  */
 export const isReady = errorWrapper(async (req: Request, res: Response) => {
+  if (DEBUG) console.log('isReady controller in controllers/health called.');
   // Indicates if DataSource was initialized and initial connection was established or not.
   const isInitialized = dataSource.isInitialized;
   if (!isInitialized) {

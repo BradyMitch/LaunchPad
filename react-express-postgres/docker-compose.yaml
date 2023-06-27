@@ -33,6 +33,7 @@ services:
       dockerfile: ./backend/Dockerfile
     environment:
       - ENVIRONMENT=${ENVIRONMENT:-local}
+      - DEBUG=${DEBUG:-false}
       - PORT=${BACKEND_PORT:-9009}
       - FRONTEND_PORT=${FRONTEND_PORT:-9000}
       - PGHOST=${DATABASE_HOST:-database} # Name of the database container.

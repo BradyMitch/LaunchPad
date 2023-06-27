@@ -1,6 +1,10 @@
 paths:
   /config:
     get:
+      security:
+        - Keycloak:
+            - openid
+            - email
       tags:
         - Server
       summary: Retrieve configuration variables

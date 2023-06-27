@@ -12,19 +12,19 @@
     "create-subscriber": "typeorm-ts-node-commonjs subscriber:create"
   },
   "dependencies": {
-    "@bcgov/keycloak-express": "file:./src/experimental/bcgov-keycloak-express-1.0.0-alpha.1.tgz",
+    "@bcgov/keycloak-express": "https://github.com/bcgov/keycloak-express/releases/download/v1.0.0-alpha.1/bcgov-keycloak-express.tgz",
     "cookie-parser": "1.4.6",
     "cors": "2.8.5",
     "dotenv": "16.0.3",
     "express": "4.18.2",
     "express-rate-limit": "6.7.0",
-    "openid-client": "5.4.0",
     "pg": "8.10.0",
     "reflect-metadata": "0.1.13",
     "swagger-jsdoc": "6.2.8",
     "swagger-ui-express": "4.6.2",
     "typeorm": "0.3.13",
-    "typescript": "5.0.4"
+    "typescript": "5.0.4",
+    "zod": "3.21.4"
   },
   "devDependencies": {
     "@types/cookie-parser": "1.4.3",
